@@ -10,6 +10,7 @@ public class InventoryManagementApplication {
 		SpringApplication.run(InventoryManagementApplication.class, args);
 		System.out.println("Started.................");
 		System.out.println("Started.................");
+		System.out.println("Started.................");
 		System.out.println("git_nitinn");
 	}
 
