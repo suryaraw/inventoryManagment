@@ -6,6 +6,10 @@
 
 </head>
 <body>
+	<div class="page-heading">
+	        <h1>Inventory Management System</h1>
+	</div>
+		
     <div class="content-box">
         <h2>Login</h2>
         <form action="/login" method="post">

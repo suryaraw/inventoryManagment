@@ -1,3 +1,4 @@
+/* General body styling */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -6,12 +7,25 @@ body {
     animation: fadeIn 1s ease-in;
 }
 
+/* Page Heading */
+.page-heading {
+    text-align: center;
+    padding: 15px;
+    font-size: 22px;   /* reduced size */
+    font-weight: 600;  /* lighter than bold */
+    color: #2c3e50;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Headings */
 h2 {
     text-align: center;
     color: #2c3e50;
 }
 
-/*form, .content-box {
+/* Login form box */
+.content-box {
     background: rgba(255, 255, 255, 0.85);
     padding: 20px;
     border-radius: 15px;
@@ -19,63 +33,38 @@ h2 {
     margin: 100px auto;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     animation: slideUp 0.8s ease-out;
-}*/
-
-/* Center everything vertically & horizontally */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(120deg, #74ebd5 0%, #ACB6E5 100%);
-    color: #333;
-    animation: fadeIn 1s ease-in;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* full screen */
-}
-
-/* Login card */
-.content-box {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 30px;
-    border-radius: 15px;
-    width: 350px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    animation: slideUp 0.8s ease-out;
     text-align: center;
 }
 
-.content-box h2 {
-    margin-bottom: 20px;
+/* Dashboard box (separate from login) */
+.dashboard-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: left;
+    animation: fadeIn 1s ease-in;
 }
 
-/* Input fields */
-input, button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    outline: none;
-    font-size: 14px;
+.dashboard-box h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 15px;
 }
 
-/* Button */
-button {
-    background: #3498db;
-    color: white;
-    border: none;
-    transition: 0.3s;
-    cursor: pointer;
+.dashboard-box ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-button:hover {
-    background: #2980b9;
-    transform: scale(1.05);
+.dashboard-box ul li {
+    margin: 10px 0;
+    font-size: 16px;
 }
 
-
+/* Inputs and buttons */
 input, button {
     width: 100%;
     padding: 10px;
@@ -90,6 +79,7 @@ button {
     color: white;
     border: none;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 button:hover {
@@ -97,6 +87,7 @@ button:hover {
     transform: scale(1.05);
 }
 
+/* Navbar */
 .navbar {
     background: rgba(44,62,80,0.9);
     padding: 15px;
@@ -118,6 +109,17 @@ button:hover {
     color: #1abc9c;
 }
 
+/* Welcome text */
+.welcome-text {
+    text-align: center;
+    margin: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Banner (optional for dashboard) */
 .banner {
     height: 200px;
     background: url('/images/banner.jpg') center/cover no-repeat;
@@ -131,6 +133,7 @@ button:hover {
     animation: fadeIn 1.5s ease-in;
 }
 
+/* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
