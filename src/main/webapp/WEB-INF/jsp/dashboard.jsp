@@ -2,10 +2,12 @@
 <html>
 <head>
     <title>Dashboard</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
+    
+
+    <!-- Navbar -->
     <div class="navbar">
         <a href="/dashboard">Home</a>
         <a href="#">Profile</a>
@@ -14,17 +16,19 @@
         <a href="/logout">Logout</a>
     </div>
 
-    <div class="banner">
-        Welcome, ${username} 🎉
+    <!-- Welcome text -->
+    <div class="welcome-text">
+        <h2>Welcome, admin 🎉</h2>
     </div>
 
-    <div class="content-box" style="margin-top:50px;">
+    <!-- Dashboard box -->
+    <div class="dashboard-box">
         <h2>Dashboard</h2>
         <p>Here are your quick actions:</p>
         <ul>
-            <li><a href="#">📦 Manage Orders</a></li>
-            <li><a href="#">📊 View Reports</a></li>
-            <li><a href="#">⚙️ Update Settings</a></li>
+            <li>📦 <a href="#">Manage Orders</a></li>
+            <li>📊 <a href="#">View Reports</a></li>
+            <li>⚙️ <a href="#">Update Settings</a></li>
         </ul>
     </div>
 </body>
