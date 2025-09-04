@@ -11,7 +11,7 @@ h2 {
     color: #2c3e50;
 }
 
-form, .content-box {
+/*form, .content-box {
     background: rgba(255, 255, 255, 0.85);
     padding: 20px;
     border-radius: 15px;
@@ -19,7 +19,62 @@ form, .content-box {
     margin: 100px auto;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     animation: slideUp 0.8s ease-out;
+}*/
+
+/* Center everything vertically & horizontally */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #74ebd5 0%, #ACB6E5 100%);
+    color: #333;
+    animation: fadeIn 1s ease-in;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* full screen */
 }
+
+/* Login card */
+.content-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    width: 350px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    animation: slideUp 0.8s ease-out;
+    text-align: center;
+}
+
+.content-box h2 {
+    margin-bottom: 20px;
+}
+
+/* Input fields */
+input, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+}
+
+/* Button */
+button {
+    background: #3498db;
+    color: white;
+    border: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2980b9;
+    transform: scale(1.05);
+}
+
 
 input, button {
     width: 100%;
