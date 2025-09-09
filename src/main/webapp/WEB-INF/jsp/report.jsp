@@ -56,6 +56,24 @@
 	    td {
 	        color: #555;
 	    }
+	    /* PDF Button style */
+	    .pdf-btn {
+	        margin-top: 25px;
+	        padding: 12px 30px;
+	        font-size: 16px;
+	        font-weight: 600;
+	        color: #fff;
+	        background-color: #007bff;
+	        border: none;
+	        border-radius: 8px;
+	        cursor: pointer;
+	        transition: all 0.3s ease;
+	    }
+	    .pdf-btn:hover {
+	        background-color: #0056b3;
+	        transform: translateY(-2px);
+	        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+	    }
 	</style>
 </head>
 <body>
@@ -74,5 +92,10 @@
             </tr>
         </c:forEach>
     </table>
+
+    <!-- Generate PDF Button -->
+    <form action="${pageContext.request.contextPath}/report/pdf" method="get">
+        <button type="submit" class="pdf-btn">GENERATE PDF</button>
+    </form>
 </body>
 </html>
