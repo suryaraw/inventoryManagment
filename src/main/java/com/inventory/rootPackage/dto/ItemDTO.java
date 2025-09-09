@@ -1,0 +1,18 @@
+package com.inventory.rootPackage.dto;
+
+import lombok.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ItemDTO {
+    private Long id;
+    private String name;
+    private String category;
+    private String brand;
+    private String model;
+    private Double wholesalePrice;
+    private Double retailPrice;
+    private Double gstRate;
+}
+
