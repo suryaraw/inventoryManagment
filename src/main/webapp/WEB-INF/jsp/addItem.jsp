@@ -7,7 +7,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="dashboard-page">
+	
+	<!-- Navbar -->
+	<div class="navbar">
+	    <a href="${pageContext.request.contextPath}/dashboard"><i class="fa fa-home"></i> Dashboard</a>
+	    <!--<a href="${pageContext.request.contextPath}/items"><i class="fa fa-box"></i> Items</a>-->
+		<div class="dropdown">
+		    <a href="#"><i class="fa fa-box"></i> Items ▾</a>
+		    <div class="dropdown-content">
+		        <a href="${pageContext.request.contextPath}/items/add">Add Item</a>
+		        <a href="${pageContext.request.contextPath}/items">View Items</a>
+		    </div>
+		</div>
+
+	    <a href="${pageContext.request.contextPath}/orders"><i class="fa fa-shopping-cart"></i> Orders</a>
+	    <a href="${pageContext.request.contextPath}/report"><i class="fa fa-chart-line"></i> Reports</a>
+	    <a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
+	</div>
+	
 	<div class="add-item-container">
 	    <h2><i class="fa fa-plus-circle"></i> Add New Item</h2>
 	    <form action="${pageContext.request.contextPath}/items/save" method="post">

@@ -9,7 +9,7 @@
 	<div class="logout-container">
 	    <div class="logout-box">
         <h2>You have successfully logged out.</h2>
-        <a href="login"><button>Login Again</button></a>
+        <a href="${pageContext.request.contextPath}/"><button>Login Again</button></a>
     </div>
 	</div>
 	

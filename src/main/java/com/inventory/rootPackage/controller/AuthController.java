@@ -16,6 +16,8 @@ public class AuthController {
     public String loginPage() {
         return "login"; // login.jsp
     }	
+	
+	
 
     // Handle login form submit
     @PostMapping("/login")
