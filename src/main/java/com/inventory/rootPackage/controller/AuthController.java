@@ -12,10 +12,10 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class AuthController {
 
-	@GetMapping("/login")
+	@GetMapping("/")
     public String loginPage() {
         return "login"; // login.jsp
-    }
+    }	
 
     // Handle login form submit
     @PostMapping("/login")
@@ -70,5 +70,6 @@ public class AuthController {
         session.invalidate();
         return "logout"; // logout.jsp
     }
+
 	
 }
