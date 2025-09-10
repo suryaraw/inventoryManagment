@@ -14,7 +14,7 @@
     <a href="${pageContext.request.contextPath}/dashboard"><i class="fa fa-home"></i> Dashboard</a>
     <a href="${pageContext.request.contextPath}/items"><i class="fa fa-box"></i> Items</a>
     <a href="${pageContext.request.contextPath}/orders"><i class="fa fa-shopping-cart"></i> Orders</a>
-    <a href="${pageContext.request.contextPath}/reports"><i class="fa fa-chart-line"></i> Reports</a>
+    <a href="${pageContext.request.contextPath}/report"><i class="fa fa-chart-line"></i> Reports</a>
     <a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
 </div>
 
