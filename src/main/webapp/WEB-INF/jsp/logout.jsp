@@ -2,16 +2,19 @@
 <html>
 <head>
     <title>Logout</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
 </head>
-<body>
-	<div class="logout-container">
-	    <div class="logout-box">
+<body class="dashboard-page">
+	<script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
+
+<div class="app" style="justify-content:center;align-items:center;">
+    <div class="panel" style="max-width:400px; width:100%; text-align:center;">
         <h2>You have successfully logged out.</h2>
-        <a href="login"><button>Login Again</button></a>
+        <a href="login">
+            <button class="theme-toggle" style="margin-top:20px;">Login Again</button>
+        </a>
     </div>
-	</div>
-	
+</div>
+
 </body>
 </html>
