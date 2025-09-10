@@ -29,7 +29,16 @@
                 <i class="fa fa-lock"></i>
                 <input type="password" name="password" placeholder="Password" required>
             </div>
-
+			
+			<div class="input-group">
+			               <i class="fa fa-users"></i>
+			               <select name="role" required>
+			                   <option value="">-- Select Role --</option>
+			                   <option value="ADMIN">Admin</option>
+			                   <option value="RETAIL_SHOP">Retail Shop</option>
+			               </select>
+			           </div>
+			
             <button type="submit">Login</button>
 
             <div class="extra-links">

@@ -12,7 +12,15 @@
 <!-- Navbar -->
 <div class="navbar">
     <a href="${pageContext.request.contextPath}/dashboard"><i class="fa fa-home"></i> Dashboard</a>
-    <a href="${pageContext.request.contextPath}/items"><i class="fa fa-box"></i> Items</a>
+    <!--<a href="${pageContext.request.contextPath}/items"><i class="fa fa-box"></i> Items</a>-->
+	<div class="dropdown">
+	    <a href="#"><i class="fa fa-box"></i> Items ▾</a>
+	    <div class="dropdown-content">
+	        <a href="${pageContext.request.contextPath}/items/add">Add Item</a>
+	        <a href="${pageContext.request.contextPath}/items">View Items</a>
+	    </div>
+	</div>
+
     <a href="${pageContext.request.contextPath}/orders"><i class="fa fa-shopping-cart"></i> Orders</a>
     <a href="${pageContext.request.contextPath}/report"><i class="fa fa-chart-line"></i> Reports</a>
     <a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
