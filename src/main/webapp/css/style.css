@@ -88,6 +88,35 @@ h2 {
     transform: scale(1.02);  
 }
 
+/*login dropdown */
+
+/* Modern dropdown styling */
+.input-group select {
+    width: 100%;
+    padding: 14px 12px 14px 45px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.3s, transform 0.3s;
+    appearance: none;             /* removes default browser arrow */
+    background-color: #fff;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='gray' class='bi bi-chevron-down' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+.input-group select:focus {
+    border-color: #3498db;
+    transform: scale(1.02);
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+}
+
+
+
+
 .login-card button {
     width: 100%;
     padding: 12px;
@@ -217,6 +246,106 @@ body.dashboard-page {
     font-weight: 500;
     color: #34495e;
 }
+
+/* Dashboard dropdown */
+
+.dropdown a {
+    color: #ecf0f1;
+    padding: 14px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Position dropdown properly */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #334455;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* =====================
+   Add Item Form Styling
+===================== */
+.add-item-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    animation: fadeIn 1s ease-in;
+}
+
+.add-item-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.add-item-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-item-container .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-item-container label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #34495e;
+}
+
+.add-item-container input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.add-item-container input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+}
+
+.add-item-container button {
+    padding: 12px;
+    background: #3498db;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.add-item-container button:hover {
+    background: #2980b9;
+    transform: scale(1.02);
+}
+
+
 
 /* =====================
    Logout Styling

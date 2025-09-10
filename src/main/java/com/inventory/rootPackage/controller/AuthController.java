@@ -21,14 +21,24 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
+                        @RequestParam String role,
                         HttpSession session,
                         Model model) {
         // Simple hardcoded validation
-        if ("admin".equals(username) && "admin123".equals(password)) {
+        if ("admin".equals(username) && "admin123".equals(password) && "ADMIN".equals(role)) {
             session.setAttribute("user", username);
+            session.setAttribute("role", role);
             System.out.println(username + " " + password);
             return "redirect:/dashboard";
-        } else {
+        }
+        
+        else if ("retail".equals(username) && "retail123".equals(password) && "RETAIL_SHOP".equals(role)) {
+            session.setAttribute("user", username);
+            session.setAttribute("role", role);
+            return "redirect:/retailDashboard";
+        }
+        
+        else {
             model.addAttribute("error", "Invalid username or password");
             return "login";
         }
@@ -42,6 +52,16 @@ public class AuthController {
         }
         model.addAttribute("username", session.getAttribute("user"));
         return "dashboard"; // dashboard.jsp
+    }
+    
+ // Show retail shop dashboard
+    @GetMapping("/retailDashboard")
+    public String retaildashboard(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("username", session.getAttribute("user"));
+        return "retailDashboard";
     }
     
  // Logout
