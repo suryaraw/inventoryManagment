@@ -12,9 +12,11 @@ public class ReportService {
 
 	public List<Report> getInventoryReport() {
 		List<Report> reports = new ArrayList<>();
-		reports.add(new Report("SUKOVIA", 100, 20));
+		reports.add(new Report("SUKOVIA-17", 100, 20));
 		reports.add(new Report("AIRCRAFT", 50, 5));
-		reports.add(new Report("BANZER", 200, 40));
+		reports.add(new Report("PANZER", 200, 40));
+		reports.add(new Report("FF-22", 200, 40));
+		reports.add(new Report("FAT MAN", 200, 40));
 		return reports;
 	}
 
