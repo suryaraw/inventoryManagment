@@ -15,7 +15,7 @@ public class AuthController {
 	@GetMapping("/")
     public String loginPage() {
         return "login"; // login.jsp
-    }	
+    }
 
     // Handle login form submit
     @PostMapping("/login")
@@ -35,7 +35,7 @@ public class AuthController {
         else if ("retail".equals(username) && "retail123".equals(password) && "RETAIL_SHOP".equals(role)) {
             session.setAttribute("user", username);
             session.setAttribute("role", role);
-            return "redirect:/retailDashboard";
+            return "redirect:/shop/items";
         }
         
         else {
@@ -54,15 +54,6 @@ public class AuthController {
         return "dashboard"; // dashboard.jsp
     }
     
- // Show retail shop dashboard
-    @GetMapping("/retailDashboard")
-    public String retaildashboard(HttpSession session, Model model) {
-        if (session.getAttribute("user") == null) {
-            return "redirect:/login";
-        }
-        model.addAttribute("username", session.getAttribute("user"));
-        return "retailDashboard";
-    }
     
  // Logout
     @GetMapping("/logout")

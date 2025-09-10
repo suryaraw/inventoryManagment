@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,16 +20,50 @@
     </div>
 </div>
 
-<!-- Dashboard Box -->
+<!-- Dashboard -->
 <div class="dashboard-box">
     <h2>Hello, ${sessionScope.user} 👋</h2>
-    <p class="welcome-text">Welcome to your Retail Dashboard. Here’s an overview:</p>
+    <p class="welcome-text">Welcome to your Retail Dashboard. Select items to order:</p>
 
-    <ul>
-        <li><i class="fa fa-box"></i> Available Items: <b>50</b></li>
-        <li><i class="fa fa-shopping-cart"></i> Orders Placed: <b>12</b></li>
-        <li><i class="fa fa-wallet"></i> Pending Payments: <b>₹15,000</b></li>
-    </ul>
+    <!-- Form -->
+    <form action="${pageContext.request.contextPath}/shop/selected" method="post">
+        <table border="1" cellspacing="0" cellpadding="8" style="width:100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                    <th>Category</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                    <th>GST</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="item" items="${items}">
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="picked" value="${item.id}">
+                        </td>
+                        <td>${item.id}</td>
+                        <td>${item.name}</td>
+                        <td>${item.category}</td>
+                        <td>${item.brand}</td>
+                        <td>${item.model}</td>
+                        <td>₹${item.price}</td>
+                        <td>${item.gst}</td>
+                        <td>
+                            <input type="number" name="quantity_${item.id}" min="1" value="1" style="width:60px;">
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+
+        <button type="submit" style="margin-top:15px;">Proceed to Checkout</button>
+    </form>
 </div>
 
 </body>
