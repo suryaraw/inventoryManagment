@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class AuthController {
 
-	@GetMapping("/")
+	@GetMapping("/login")
     public String loginPage() {
         return "login"; // login.jsp
     }	
