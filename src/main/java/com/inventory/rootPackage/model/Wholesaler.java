@@ -23,4 +23,5 @@ public class Wholesaler {
     
     @ManyToMany(mappedBy = "suppliers")
     private List<Item> items;
+	/* @OneToMany */
 }

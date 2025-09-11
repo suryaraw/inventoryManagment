@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,7 @@ public class Item {
         joinColumns = @JoinColumn(name = "item_id"), // FK to Item
         inverseJoinColumns = @JoinColumn(name = "wholesaler_id") // FK to Wholesaler
     )
+	/* @ManyToOne */
     private List<Wholesaler> suppliers;
 	
 
