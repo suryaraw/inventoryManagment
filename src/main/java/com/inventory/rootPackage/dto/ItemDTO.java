@@ -1,5 +1,7 @@
 package com.inventory.rootPackage.dto;
 
+import java.util.Locale.Category;
+
 import lombok.*;
 
 @Data
@@ -9,7 +11,7 @@ public class ItemDTO {
 	
     private Long id;
     private String name;
-    private String category;
+    private Category category;
     private String brand;
     private String model;
     private Double wholesalePrice;
