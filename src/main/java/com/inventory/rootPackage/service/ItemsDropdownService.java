@@ -1,5 +1,6 @@
 package com.inventory.rootPackage.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,11 +54,33 @@ public class ItemsDropdownService implements ItemService{
     }
 	
 
+	/*
+	 * @Override public ItemDTO saveItem(ItemDTO itemDTO) { Item saved =
+	 * itemRepo.save(convertToEntity(itemDTO)); return convertToDTO(saved); }
+	 */
 	@Override
 	public ItemDTO saveItem(ItemDTO itemDTO) {
-		Item saved = itemRepo.save(convertToEntity(itemDTO));
-        return convertToDTO(saved);
+	    Item item = new Item();
+	    item.setName(itemDTO.getName());
+	    item.setCategory(itemDTO.getCategory());
+	    item.setBrand(itemDTO.getBrand());
+	    item.setModel(itemDTO.getModel());
+	    item.setWholesalePrice(itemDTO.getWholesalePrice());
+	    item.setRetailPrice(itemDTO.getRetailPrice());
+	    item.setGstRate(itemDTO.getGstRate());
+
+	    if (itemDTO.getDateOfPurchase() == null) {
+	        item.setDateOfPurchase(LocalDate.now());
+	    } else {
+	        item.setDateOfPurchase(itemDTO.getDateOfPurchase());
+	    }
+
+	    item.setSuppliers(itemDTO.getSuppliers());
+
+	    Item saved = itemRepo.save(item);
+	    return convertToDTO(saved);
 	}
+
 
 	@Override
 	public List<ItemDTO> getAllItems() {
