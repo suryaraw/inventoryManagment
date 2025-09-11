@@ -45,6 +45,4 @@ public class ShopKeeperController {
     		return service.picked(request, model);
     }
     
-    
-    
 }
