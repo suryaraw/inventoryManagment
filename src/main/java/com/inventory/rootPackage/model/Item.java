@@ -1,8 +1,11 @@
 package com.inventory.rootPackage.model;
 
 import java.time.LocalDate;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
+=======
+>>>>>>> origin/feature_surya
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +33,10 @@ public class Item {
 	private long id;
 	private String name;
 	private String category;
+//	private String category;
+	@ManyToOne
+    @JoinColumn(name = "category_id") 
+    private Category category;
 	private String brand;
 	private String model;
 	private Double wholesalePrice;
@@ -44,5 +51,29 @@ public class Item {
     )
     private List<Wholesaler> suppliers;
 	
+//    private LocalDate dateOfPurchase;
+//    @ManyToMany
+//    @JoinTable
+//    private Wholesaler supplier;
+	
+//	@Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq")
+//   // @SequenceGenerator(name = "item_seq", sequenceName = "item_sequence", initialValue = 1001, allocationSize = 1)
+//    private Long itemId;
+//
+//    private String itemName;
+//    private String category;
+//    private String description;
+//    private Integer quantityInStock;
+////    private String unitOfMeasure;
+////    private String location;
+//    @ManyToMany
+//    @JoinTable
+//    private Wholesaler supplier;
+//    private Double purchasePrice;
+//    private Double sellingPrice;
+//    private LocalDate dateOfPurchase;
+////    private Integer reorderLevel;
+////    private Integer reorderQuantity;
 	
 }

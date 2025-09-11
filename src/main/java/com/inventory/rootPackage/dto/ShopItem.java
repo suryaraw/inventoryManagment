@@ -14,7 +14,7 @@ public class ShopItem {
 	    private String category;
 	    private String brand;
 	    private String model;
-	    private Double Price;
-	    private Double gstRate;
+	    private Double price;
+	    private Double gst;
 	    
 }
