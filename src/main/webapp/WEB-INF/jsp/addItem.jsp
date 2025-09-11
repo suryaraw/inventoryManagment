@@ -86,11 +86,13 @@
         }
     </style>
 </head>
+
 <body>
     <div class="app">
         <div class="add-item-card">
             <h2><i class="fa fa-plus-circle"></i> Add New Item</h2>
-            <form action="${pageContext.request.contextPath}/addItem" method="post">
+           <!-- <form action="${pageContext.request.contextPath}/addItem" method="post">-->
+			<form action="${pageContext.request.contextPath}/items/save" method="post">
                 <div class="form-group">
                     <label for="name">Item Name</label>
                     <input type="text" id="name" name="name" placeholder="Enter item name" required/>
@@ -125,5 +127,6 @@
             </form>
         </div>
     </div>
+
 </body>
 </html>
