@@ -3,10 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Retail Shop Dashboard</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+    <title>Inventory Management - Report</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Table hover effect */
+        table tbody tr:hover {
+            background-color: #f2f6ff; /* light blue highlight */
+            color: #000; /* keep text dark for readability */
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            font-weight: 500; /* slightly bold for clarity */
+        }
+
+        table tbody tr:hover td {
+            color: #000; /* ensures text inside cells stays dark */
+        }
+    </style>
 </head>
 <body class="dashboard-page">
 
