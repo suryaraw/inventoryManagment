@@ -19,11 +19,10 @@ public class ItemController {
 	    return "addItem";
 	}
 
-	@PostMapping("/save")
-    public String saveItem(@ModelAttribute("item") Item item) {
-        // save item to DB
-		
-        return "redirect:/items";
-    }
+	@PostMapping("/items/save")
+	public String saveItem(@ModelAttribute("item") Item item) {
+	    return "redirect:/items";
+	}
+
 	
 }

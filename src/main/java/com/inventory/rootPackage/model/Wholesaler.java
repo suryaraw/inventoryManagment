@@ -1,5 +1,7 @@
 package com.inventory.rootPackage.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,4 +20,7 @@ public class Wholesaler {
     private String phone;
     private String email;
     private String address;
+    
+    @ManyToMany(mappedBy = "suppliers")
+    private List<Item> items;
 }

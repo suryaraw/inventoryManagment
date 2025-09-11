@@ -20,16 +20,43 @@ public class ItemsDropdownService implements ItemService{
 		this.itemRepo = itemRepo;
 	}
 	
-	/*
-	 * private ItemDTO convertToDTO(Item item) { return new ItemDTO( item.getId(),
-	 * item.getName(), item.getCategory(), item.getBrand(), item.getModel(),
-	 * item.getWholesalePrice(), item.getRetailPrice(), item.getGstRate() ); }
-	 */
+	private ItemDTO convertToDTO(Item item) {
+        return new ItemDTO(
+                item.getId(),
+                item.getName(),
+                item.getCategory(),
+                item.getBrand(),
+                item.getModel(),
+                item.getWholesalePrice(),
+                item.getRetailPrice(),
+                item.getGstRate(),
+                item.getDateOfPurchase(),
+                item.getSuppliers()
+                
+        );
+    }
+	
+	
+	private Item convertToEntity(ItemDTO dto) {
+        return new Item(
+                dto.getId(),
+                dto.getName(),
+                dto.getCategory(),
+                dto.getBrand(),
+                dto.getModel(),
+                dto.getWholesalePrice(),
+                dto.getRetailPrice(),
+                dto.getGstRate(),
+                dto.getDateOfPurchase(),
+                dto.getSuppliers()
+        );
+    }
+	
 
 	@Override
-	public ItemDTO saveItem(ItemDTO item) {
-		// TODO Auto-generated method stub
-		return null;
+	public ItemDTO saveItem(ItemDTO itemDTO) {
+		Item saved = itemRepo.save(convertToEntity(itemDTO));
+        return convertToDTO(saved);
 	}
 
 	@Override
