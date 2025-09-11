@@ -36,13 +36,9 @@
         }
     </style>
 </head>
-<<<<<<< HEAD
 <body>
 	<div class="logout-container">
 	    <div class="logout-box">
-        <h2>You have successfully logged out.</h2>
-        <a href="/"><button>Login Again</button></a>
-=======
 <body class="dashboard-page">
 	<script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 
@@ -53,7 +49,6 @@
                 <button class="login-again-btn" style="margin-top:20px;">Login Again</button>
             </a>
         </div>
->>>>>>> origin/feature_surya
     </div>
 </body>
 </html>
