@@ -1,7 +1,9 @@
 package com.inventory.rootPackage.model;
 
 import java.time.LocalDate;
-import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,8 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +35,9 @@ public class Item {
 	private Double wholesalePrice;
 	private Double RetailPrice;
 	private Double gstRate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")   // must match <input type="date">
 	private LocalDate dateOfPurchase;
+	private Integer quantity;
 
 	@ManyToOne
 	@JoinColumn(name = "supplier_id")

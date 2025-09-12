@@ -38,9 +38,6 @@
 </head>
 <body>
 	<div class="logout-container">
-	    <div class="logout-box">
-        <a href="${pageContext.request.contextPath}/"><button>Login Again</button></a>
-<body class="dashboard-page">
 	<script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 
     <div class="app" style="justify-content:center;align-items:center;">

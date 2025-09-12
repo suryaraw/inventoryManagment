@@ -49,16 +49,6 @@
 				<th>GST(%)</th>
 				<th>Quantity</th>
 				<th>Amount</th>
-				
-				id;
-				    private String name;
-				    private String category;
-				    private String brand;
-				    private String model;
-				    private Double retailPrice;
-				    private Double gstRate;
-				    private Integer quantity;
-				    private Double Amount;
             </tr>
         </thead>
         <tbody>

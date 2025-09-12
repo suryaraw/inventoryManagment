@@ -29,10 +29,7 @@ public class ShopKeeperController {
     @GetMapping("/items")
     public String retaildashboard(HttpSession session, Model model) {
         if (session.getAttribute("user") == null) {
-            return "redirect:/login";
-        }
-        
-        
+            return "redirect:/login";}
         List<ItemDTO> itemsForshop = service.getAllItems();
         model.addAttribute("items",itemsForshop);
         return "retailDashboard";

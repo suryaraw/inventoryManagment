@@ -1,21 +1,16 @@
 package com.inventory.rootPackage.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.inventory.rootPackage.dto.ItemDTO;
-import com.inventory.rootPackage.dto.ShopItem;
 import com.inventory.rootPackage.mapper.ItemMapper;
 import com.inventory.rootPackage.model.Item;
-import com.inventory.rootPackage.model.ShoperView;
 import com.inventory.rootPackage.repository.ItemRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,7 +42,8 @@ public class ShopkeeperService {
 			Long id=Long.parseLong(value[i]);
 			Integer quantity=Integer.parseInt(request.getParameter("quantity_"+value[i]));
 			Item item=itemrepo.findById(id).get();
-			Double amount = (item.getRetailPrice() * quantity ) + ((item.getRetailPrice() * quantity *item.getGstRate())/100);
+			Double amount = (item.getRetailPrice() * quantity ) +
+					((item.getRetailPrice() * quantity *item.getGstRate())/100);
 			ItemDTO selected = ItemMapper.toDTO(itemrepo.findById(id).get());
 			selected.setQuantity(quantity);
 			selected.setAmount(amount);
