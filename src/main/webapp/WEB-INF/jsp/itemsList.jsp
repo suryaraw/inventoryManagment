@@ -79,6 +79,39 @@
         .add-btn:hover {
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         }
+		
+		.pagination {
+		    margin-top: 25px;
+		    text-align: center;
+		}
+
+		.page-btn {
+		    display: inline-block;
+		    margin: 0 5px;
+		    padding: 10px 15px;
+		    border-radius: 50%;
+		    background: rgba(255, 255, 255, 0.1);
+		    color: #fff;
+		    font-weight: bold;
+		    text-decoration: none;
+		    transition: all 0.3s ease;
+		    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+		}
+
+		.page-btn:hover {
+		    background: rgba(255, 255, 255, 0.3);
+		    color: #000;
+		    transform: scale(1.15);
+		    box-shadow: 0 8px 16px rgba(255,255,255,0.5);
+		}
+
+		.page-btn.active {
+		    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+		    color: #fff;
+		    transform: scale(1.2);
+		    box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+		}
+
     </style>
 </head>
 <body>
@@ -95,8 +128,10 @@
                         <th>Model</th>
                         <th>Wholesale Price</th>
                         <th>Retail Price</th>
+						<th>PurchaseDate</th>
                         <th>GST (%)</th>
-                        <th>Actions</th>
+                        <th>Supplier</th>
+						<th>Modify</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -109,7 +144,9 @@
                             <td>${item.model}</td>
                             <td>${item.wholesalePrice}</td>
                             <td>${item.retailPrice}</td>
+							<td>${item.dateOfPurchase}</td>
                             <td>${item.gstRate}</td>
+							<td>${item.supplier.name}</td>
                             <td class="actions">
                                 <a href="${pageContext.request.contextPath}/items/edit/${item.id}">✏ Edit</a>
                                 <a href="${pageContext.request.contextPath}/items/delete/${item.id}">🗑 Delete</a>
@@ -118,8 +155,31 @@
                     </c:forEach>
                 </tbody>
             </table>
+			
+			<div class="pagination">
+			    <c:if test="${totalPages > 1}">
+			        <c:if test="${currentPage > 0}">
+			            <a class="page-btn" href="${pageContext.request.contextPath}/items?page=${currentPage - 1}&size=10">⬅</a>
+			        </c:if>
 
-            <a href="${pageContext.request.contextPath}/items/add" class="add-btn">➕ Add New Item</a>
+			        <c:forEach var="i" begin="0" end="${totalPages - 1}">
+			            <c:choose>
+			                <c:when test="${i == currentPage}">
+			                    <span class="page-btn active">${i + 1}</span>
+			                </c:when>
+			                <c:otherwise>
+			                    <a class="page-btn" href="${pageContext.request.contextPath}/items?page=${i}&size=10">${i + 1}</a>
+			                </c:otherwise>
+			            </c:choose>
+			        </c:forEach>
+
+			        <c:if test="${currentPage < totalPages - 1}">
+			            <a class="page-btn" href="${pageContext.request.contextPath}/items?page=${currentPage + 1}&size=10">➡</a>
+			        </c:if>
+			    </c:if>
+			</div>
+
+            <a href="${pageContext.request.contextPath}/sup/add" class="add-btn">➕ Add New Item</a>
         </div>
     </div>
 </body>

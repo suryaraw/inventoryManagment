@@ -1,16 +1,26 @@
 package com.inventory.rootPackage.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.inventory.rootPackage.service.ItemAddService;
+import com.inventory.rootPackage.service.SupplierService;
+
 import jakarta.servlet.http.HttpSession;
 
 
 @Controller
 public class AuthController {
+	
+	@Autowired
+	private SupplierService service;
+	
+	@Autowired
+	private ItemAddService itemservice;
 
 	@GetMapping("/login")
     public String loginPage() {
@@ -29,6 +39,8 @@ public class AuthController {
             session.setAttribute("user", username);
             session.setAttribute("role", role);
             System.out.println(username + " " + password);
+            service.addSupplier();
+            itemservice.addSampleItems();
             return "redirect:/dashboard";
         }
         

@@ -15,14 +15,15 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "supplier")
 public class Item {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "item_id")
@@ -35,14 +36,9 @@ public class Item {
 	private Double RetailPrice;
 	private Double gstRate;
 	private LocalDate dateOfPurchase;
-	@ManyToMany
-    @JoinTable(
-        name = "item_wholesaler", // name of join table
-        joinColumns = @JoinColumn(name = "item_id"), // FK to Item
-        inverseJoinColumns = @JoinColumn(name = "wholesaler_id") // FK to Wholesaler
-    )
-	/* @ManyToOne */
-    private List<Wholesaler> suppliers;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "supplier_id")
+    private Wholesaler supplier;
 
 }

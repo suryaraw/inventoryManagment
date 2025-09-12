@@ -18,10 +18,9 @@ public class ItemDTO {
     private String category;
     private String brand;
     private String model;
-    private Double wholesalePrice;
     private Double retailPrice;
     private Double gstRate;
-    private LocalDate dateOfPurchase;
-    private List<Wholesaler> suppliers; 
+    private Integer quantity;
+    private Double Amount;
 }
 
