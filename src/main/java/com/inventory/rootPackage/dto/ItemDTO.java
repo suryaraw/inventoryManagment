@@ -1,5 +1,11 @@
 package com.inventory.rootPackage.dto;
 
+
+import java.time.LocalDate;
+import java.util.List;
+
+import com.inventory.rootPackage.model.Wholesaler;
+
 import lombok.*;
 
 @Data
@@ -12,8 +18,9 @@ public class ItemDTO {
     private String category;
     private String brand;
     private String model;
-    private Double wholesalePrice;
     private Double retailPrice;
     private Double gstRate;
+    private Integer quantity;
+    private Double Amount;
 }
 

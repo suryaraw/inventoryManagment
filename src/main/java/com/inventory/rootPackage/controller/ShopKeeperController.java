@@ -1,8 +1,6 @@
 package com.inventory.rootPackage.controller;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.inventory.rootPackage.dto.ShopItem;
+import com.inventory.rootPackage.dto.ItemDTO;
 import com.inventory.rootPackage.service.ShopkeeperService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,9 +29,8 @@ public class ShopKeeperController {
     @GetMapping("/items")
     public String retaildashboard(HttpSession session, Model model) {
         if (session.getAttribute("user") == null) {
-            return "redirect:/login";
-        }
-        List<ShopItem> itemsForshop = service.getItemsForshop();
+            return "redirect:/login";}
+        List<ItemDTO> itemsForshop = service.getAllItems();
         model.addAttribute("items",itemsForshop);
         return "retailDashboard";
     }

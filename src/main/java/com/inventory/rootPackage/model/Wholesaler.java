@@ -1,12 +1,18 @@
 package com.inventory.rootPackage.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "items")
 public class Wholesaler {
 
     @Id
@@ -15,7 +21,10 @@ public class Wholesaler {
 
     private String name;
     private String contactPerson;
-    private String phone;
+    private Long phone;
     private String email;
     private String address;
+    
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
+    private List<Item> items;
 }
