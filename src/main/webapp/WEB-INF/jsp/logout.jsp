@@ -38,6 +38,10 @@
 </head>
 <body>
 	<div class="logout-container">
+
+	    <div class="logout-box">
+<body class="dashboard-page">
+
 	<script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 
     <div class="app" style="justify-content:center;align-items:center;">
