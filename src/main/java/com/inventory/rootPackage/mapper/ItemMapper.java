@@ -7,6 +7,16 @@ public class ItemMapper {
 
 	public static ItemDTO toDTO(Item item) {
         if (item == null) return null;
+        
+//        Long id;
+//        private String name;
+//        private String category;
+//        private String brand;
+//        private String model;
+//        private Double retailPrice;
+//        private Double gstRate;
+//        private Integer quantity;
+//    }
 
         return new ItemDTO(
             item.getId(),
@@ -14,11 +24,10 @@ public class ItemMapper {
             item.getCategory(),
             item.getBrand(),
             item.getModel(),
-            item.getWholesalePrice(),
             item.getRetailPrice(),
             item.getGstRate(),
-            item.getDateOfPurchase(),
-            item.getSuppliers()
+            null,
+            null
         );
     }
 
@@ -31,11 +40,8 @@ public class ItemMapper {
         item.setCategory(dto.getCategory());
         item.setBrand(dto.getBrand());
         item.setModel(dto.getModel());
-        item.setWholesalePrice(dto.getWholesalePrice());
         item.setRetailPrice(dto.getRetailPrice());
         item.setGstRate(dto.getGstRate());
-        item.setDateOfPurchase(dto.getDateOfPurchase());
-        item.setSuppliers(dto.getSuppliers());
         return item;
     }
 	

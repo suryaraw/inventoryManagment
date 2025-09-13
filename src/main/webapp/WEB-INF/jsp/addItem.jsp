@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,6 +87,44 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.25);
         }
     </style>
+	<style>
+	    /* Same look as input fields */
+	    .form-group select {
+	        padding: 10px 12px;
+	        border-radius: 8px;
+	        border: none;
+	        outline: none;
+	        background: var(--glass);
+	        color: #fff;
+	        transition: all 0.2s ease;
+	        cursor: pointer;
+	    }
+
+	    /* On hover */
+	    .form-group select:hover {
+	        background: rgba(255, 255, 255, 0.1);
+	        border: 1px solid var(--accent-1); /* Outer color on hover */
+	    }
+
+	    /* On focus (when clicked) */
+	    .form-group select:focus {
+	        background: rgba(255, 255, 255, 0.15);
+	        border: 1px solid var(--accent-2);
+	    }
+
+	    /* Dropdown options */
+	    .form-group select option {
+	        background: #333;   /* Dark dropdown */
+	        color: #fff;        /* White text */
+	        padding: 10px;
+	    }
+
+	    .form-group select option:hover {
+	        background: var(--accent-1);
+	        color: #000;
+	    }
+	</style>
+
 </head>
 
 <body>
@@ -107,16 +147,24 @@
                 </div>
                 <div class="form-group">
                     <label for="model">Model</label>
-                    <input type="text" id="model" name="model" placeholder="Enter model"/>
+                    <input type="text" id="modelName" name="modelName" placeholder="Enter model"/>
                 </div>
 				<div class="form-group">
-				<label for="suppliername">Seller Name</label>
-				<input type="number" id="suppliername" name="suppliername" step="0.01" placeholder="0.00" required/>
+				    <label for="supplierId">Supplier</label>
+				    <select id="supplierId" name="supplierId" required>
+				        <c:forEach var="supplier" items="${suppliers}">
+				            <option value="${supplier.id}">${supplier.name}</option>
+				        </c:forEach>
+				    </select>
 				</div>
                 <div class="form-group">
                     <label for="wholesalePrice">Wholesale Price</label>
                     <input type="number" id="wholesalePrice" name="wholesalePrice" step="0.01" placeholder="0.00" required/>
                 </div>
+				<div class="form-group">
+				                    <label for="quantity">Quantity(pcs)</label>
+				                    <input type="number" id="quantity" name="quantity" step="0.01" placeholder="1" required/>
+				                </div>
                 <div class="form-group">
                     <label for="retailPrice">Retail Price</label>
                     <input type="number" id="retailPrice" name="retailPrice" step="0.01" placeholder="0.00" required/>
@@ -125,7 +173,6 @@
                     <label for="gstRate">GST Rate (%)</label>
                     <input type="number" id="gstRate" name="gstRate" step="0.01" placeholder="0.00" required/>
                 </div>
-				
                 <button type="submit" class="submit-btn">
                     <i class="fa fa-save"></i> Save Item
                 </button>

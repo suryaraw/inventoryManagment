@@ -66,8 +66,8 @@
                         <td>${item.category}</td>
                         <td>${item.brand}</td>
                         <td>${item.model}</td>
-                        <td>₹${item.price}</td>
-                        <td>${item.gst}</td>
+                        <td>₹${item.getRetailPrice()}</td>
+                        <td>${item.gstRate}</td>
                         <td>
                             <input type="number" name="quantity_${item.id}" min="1" value="1" style="width:60px;">
                         </td>
