@@ -130,51 +130,72 @@
 <body>
     <div class="app">
         <div class="add-item-card">
-            <h2><i class="fa fa-plus-circle"></i> Add New Item</h2>
+            <h2><i class="fa fa-plus-circle"></i> Update New Item</h2>
            <!-- <form action="${pageContext.request.contextPath}/addItem" method="post">-->
-			<form action="${pageContext.request.contextPath}/items/save" method="post">
-                <div class="form-group">
-                    <label for="name">Item Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter item name" required/>
-                </div>
-                <div class="form-group">
-                    <label for="category">Category</label>
-                    <input type="text" id="category" name="category" placeholder="Enter category" required/>
-                </div>
-                <div class="form-group">
-                    <label for="brand">Brand</label>
-                    <input type="text" id="brand" name="brand" placeholder="Enter brand"/>
-                </div>
-                <div class="form-group">
-                    <label for="model">Model</label>
-                    <input type="text" id="modelName" name="modelName" placeholder="Enter model"/>
-                </div>
+			<form action="${pageContext.request.contextPath}/item/update" method="post">
+				<input type="hidden" name="id" value="${item.id}" /> <!-- hidden field for ID -->
+
+				<div class="form-group">
+				    <label for="name">Item Name</label>
+				    <input type="text" id="name" name="name" value="${item.name}" required/>
+				</div>
+
+				<div class="form-group">
+				    <label for="category">Category</label>
+				    <input type="text" id="category" name="category" value="${item.category}" required/>
+				</div>
+
+				<div class="form-group">
+				    <label for="brand">Brand</label>
+				    <input type="text" id="brand" name="brand" value="${item.brand}"/>
+				</div>
+
+				<div class="form-group">
+				    <label for="model">Model</label>
+				    <input type="text" id="model" name="model" value="${item.model}"/>
+				</div>
+
 				<div class="form-group">
 				    <label for="supplierId">Supplier</label>
 				    <select id="supplierId" name="supplierId" required>
 				        <c:forEach var="supplier" items="${suppliers}">
-				            <option value="${supplier.id}">${supplier.name}</option>
+				            <option value="${supplier.id}" 
+				                <c:if test="${supplier.id == item.supplier.id}">selected</c:if>>
+				                ${supplier.name}
+				            </option>
 				        </c:forEach>
 				    </select>
 				</div>
-                <div class="form-group">
-                    <label for="wholesalePrice">Wholesale Price</label>
-                    <input type="number" id="wholesalePrice" name="wholesalePrice" step="0.01" placeholder="0.00" required/>
-                </div>
+				
+
+
 				<div class="form-group">
-				                    <label for="quantity">Quantity(pcs)</label>
-				                    <input type="number" id="quantity" name="quantity" step="0.01" placeholder="1" required/>
-				                </div>
-                <div class="form-group">
-                    <label for="retailPrice">Retail Price</label>
-                    <input type="number" id="retailPrice" name="retailPrice" step="0.01" placeholder="0.00" required/>
-                </div>
-                <div class="form-group">
-                    <label for="gstRate">GST Rate (%)</label>
-                    <input type="number" id="gstRate" name="gstRate" step="0.01" placeholder="0.00" required/>
-                </div>
+				    <label for="quantity">Quantity (pcs)</label>
+				    <input type="number" id="quantity" name="quantity" 
+				           step="0.01" value="${item.quantity}" required/>
+				</div>
+				<div class="form-group">
+								    <label for="retailPrice">Wholesale Price</label>
+								    <input type="number" id="wholesalePrice" name="wholesalePrice" 
+								           step="0.01" value="${item.wholesalePrice}" required/>
+				</div>
+				<div class="form-group">
+				    <label for="retailPrice">Retail Price</label>
+				    <input type="number" id="retailPrice" name="retailPrice" 
+				           step="0.01" value="${item.retailPrice}" required/>
+				</div>
+				<div class="form-group">
+					 <label for="purchaseDate">PurchaseDate</label>
+					<fmt:formatDate value="${item.dateOfPurchase}" pattern="yyyy-MM-dd" var="formattedDate"/>
+					<input type="date" id="purchaseDate" name="dateOfPurchase" value="${formattedDate}" required/>
+				</div>
+				<div class="form-group">
+				    <label for="gstRate">GST Rate (%)</label>
+				    <input type="number" id="gstRate" name="gstRate" 
+				           step="0.01" value="${item.gstRate}" required/>
+				</div>
                 <button type="submit" class="submit-btn">
-                    <i class="fa fa-save"></i> Save Item
+                    <i class="fa fa-save"></i> Update Item
                 </button>
             </form>
         </div>
