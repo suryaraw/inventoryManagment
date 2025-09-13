@@ -37,6 +37,7 @@
             </div>
 
             <a href="${pageContext.request.contextPath}/orders"><i class="fa fa-shopping-cart"></i> Orders</a>
+			<a href="${pageContext.request.contextPath}/pay"><i class="fa fa-credit-card"></i> Payments</a>
             <a href="${pageContext.request.contextPath}/report"><i class="fa fa-chart-line"></i> Reports</a>
             <a href="${pageContext.request.contextPath}/settings"><i class="fa fa-cog"></i> Settings</a>
             <a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
