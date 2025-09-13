@@ -45,18 +45,24 @@
                 <th>Category</th>
                 <th>Brand</th>
                 <th>Model</th>
-                <th>Calculation</th>
+                <th>Price</th>
+				<th>GST(%)</th>
+				<th>Quantity</th>
+				<th>Amount</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach var="entry" items="${selectedItem}">
                 <tr>
-                    <td>${entry.key.id}</td>
-                    <td>${entry.key.name}</td>
-                    <td>${entry.key.category}</td>
-                    <td>${entry.key.brand}</td>
-                    <td>${entry.key.model}</td>
-                    <td>${entry.value}</td>
+                    <td>${entry.id}</td>
+                    <td>${entry.name}</td>
+                    <td>${entry.category}</td>
+                    <td>${entry.brand}</td>
+                    <td>${entry.model}</td>
+                    <td>${entry.getRetailPrice()}</td>
+					<td>${entry.getGstRate()}</td>
+					<td>${entry.getQuantity()}</td>
+					<td>${entry.getAmount()}</td>
                 </tr>
             </c:forEach>
         </tbody>

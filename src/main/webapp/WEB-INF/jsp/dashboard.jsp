@@ -31,7 +31,7 @@
             <div class="dropdown">
                 <a href="#"><i class="fa fa-box"></i> Items ▾</a>
                 <div class="dropdown-content">
-                    <a href="${pageContext.request.contextPath}/items/add">Add Item</a>
+                    <a href="${pageContext.request.contextPath}/sup/add">Add Item</a>
                     <a href="${pageContext.request.contextPath}/items">View Items</a>
                 </div>
             </div>
