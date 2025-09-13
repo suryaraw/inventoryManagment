@@ -52,7 +52,13 @@
             white-space: nowrap;
         }
 
-        .subtitle {font-size: 13px;color: #ddd;margin-bottom: 15px;}
+        /* ✅ Success message style */
+        .subtitle {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #22c55e; /* green */
+        }
 
         .input-group {
             display: flex;
@@ -97,7 +103,10 @@
             <img src="${pageContext.request.contextPath}/images/logo1.jpg" alt="Logo">
             <h1>INVENTORY MANAGEMENT</h1>
         </div>
-        <p class="subtitle">Secure Login</p>
+
+        <!-- ✅ Success message -->
+        <p class="subtitle">Registered Successfully</p>
+
         <form action="${pageContext.request.contextPath}/login" method="post">
             <div class="input-group">
                 <i class="fa fa-user"></i>

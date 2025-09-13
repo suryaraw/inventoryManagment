@@ -76,10 +76,17 @@ public class AuthController {
     @PostMapping("/signup")
     public String signup(@RequestParam String username,
                          @RequestParam String email,
+                         @RequestParam String role,
                          @RequestParam String password,
+                         @RequestParam String confirmPassword,
                          Model model) {
-        // TODO: Save user in DB
+
+        if (!password.equals(confirmPassword)) {
+            model.addAttribute("error", "Passwords do not match!");
+            return "createAccount"; // JSP page name for signup
+        }
         model.addAttribute("message", "Account created successfully! You can login now.");
-        return "login";
+        return "confirmLogin"; // after successful signup redirect to login page
     }
+
 }
