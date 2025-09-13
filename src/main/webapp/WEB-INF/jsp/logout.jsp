@@ -8,7 +8,7 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            background: url('${pageContext.request.contextPath}/images/logout1.jpg') no-repeat center center fixed;
+            background: url('${pageContext.request.contextPath}/images/final12.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;

@@ -8,28 +8,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-image: url('${pageContext.request.contextPath}/images/background1.jpg');
+            background-image: url('${pageContext.request.contextPath}/images/final12.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
             height: 100vh;
             display: flex;
-            justify-content: center;
+            justify-content: center; 
             align-items: center;
             margin: 0;
         }
 
         /* 🔹 Transparent Glass Panel */
         .panel {
-            background: rgba(255, 255, 255, 0.1); /* transparent */
-            backdrop-filter: blur(10px); /* glass blur effect */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             border-radius: 16px;
             padding: 30px;
             max-width: 380px;
             width: 100%;
             box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.6);
             text-align: center;
+
+            /* ✅ Pop-in animation only once */
+            transform: scale(0.8);
+            opacity: 0;
+            animation: popIn 0.8s ease-out forwards;
+        }
+
+        /* Pop animation */
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            60% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         h2 {
@@ -55,7 +67,7 @@
             background: linear-gradient(to right, #2563eb, #22c55e);
             color: white;
             border: none;
-            padding: 10px 20px;   /* 🔹 medium size */
+            padding: 10px 20px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;

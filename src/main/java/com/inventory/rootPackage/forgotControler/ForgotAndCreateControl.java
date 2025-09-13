@@ -15,5 +15,6 @@ public class ForgotAndCreateControl {
 	public String createPage() {
 		return "createAccount";
 	}
+	
 
 }
