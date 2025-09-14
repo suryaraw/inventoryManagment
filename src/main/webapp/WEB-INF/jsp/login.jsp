@@ -2,7 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+	
     <title>Inventory Management System - Login</title>
+	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
@@ -115,8 +118,17 @@
                     <option value="RETAIL_SHOP">Retail Shop</option>
                 </select>
             </div>
-            <button type="submit" class="theme-btn">Login</button>
-        </form>
+            
+			
+			
+			<button type="submit" class="theme-btn" 
+			        style="padding:10px 16px; width:180px; font-size:15px;">
+			    Login
+			</button>
+        
+		
+		
+		</form>
         <div class="extra-links" style="margin-top:15px;">
             <a href="forgotPassword.jsp">Forgot Password?</a> | 
             <a href="createAccount.jsp">Create Account</a>

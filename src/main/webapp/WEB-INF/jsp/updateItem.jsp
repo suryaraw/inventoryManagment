@@ -5,6 +5,8 @@
 <html>
 <head>
     <title>Add Item</title>
+	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>

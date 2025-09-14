@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Logout</title>
+	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
     <style>
