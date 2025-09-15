@@ -27,23 +27,34 @@
                 <div class="subtitle">Admin Dashboard</div>
             </div>
         </div>
-        <nav class="nav">
-            <a href="${pageContext.request.contextPath}/dashboard" class="active"><i class="fa fa-home"></i> Overview</a>
+		<nav class="nav">
+		    <a href="${pageContext.request.contextPath}/dashboard" class="active"><i class="fa fa-home"></i> Overview</a>
 
-            <div class="dropdown">
-                <a href="#"><i class="fa fa-box"></i> Items ▾</a>
-                <div class="dropdown-content">
-                    <a href="${pageContext.request.contextPath}/sup/add">Add Item</a>
-                    <a href="${pageContext.request.contextPath}/items">View Items</a>
-                </div>
-            </div>
+		    <!-- Items Dropdown -->
+		    <div class="dropdown">
+		        <a href="#"><i class="fa fa-box"></i> Items ▾</a>
+		        <div class="dropdown-content">
+		            <a href="${pageContext.request.contextPath}/sup/add">Add Item</a>
+		            <a href="${pageContext.request.contextPath}/items">View Items</a>
+		        </div>
+		    </div>
 
-            <a href="${pageContext.request.contextPath}/orders"><i class="fa fa-shopping-cart"></i> Orders</a>
-			<a href="${pageContext.request.contextPath}/pay"><i class="fa fa-credit-card"></i> Payments</a>
-            <a href="${pageContext.request.contextPath}/report"><i class="fa fa-chart-line"></i> Reports</a>
-            <a href="${pageContext.request.contextPath}/settings"><i class="fa fa-cog"></i> Settings</a>
-            <a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
-        </nav>
+		    <!-- Suppliers Dropdown -->
+		    <div class="dropdown">
+		        <a href="#"><i class="fa fa-truck"></i> Manage Suppliers ▾</a>
+		        <div class="dropdown-content">
+		            <a href="${pageContext.request.contextPath}/sup/addsup">Add Supplier</a>
+		            <a href="${pageContext.request.contextPath}/sup/all">View Suppliers</a>
+		        </div>
+		    </div>
+
+		    <a href="${pageContext.request.contextPath}/orders"><i class="fa fa-shopping-cart"></i> Orders</a>
+		    <a href="${pageContext.request.contextPath}/pay"><i class="fa fa-credit-card"></i> Payments</a>
+		    <a href="${pageContext.request.contextPath}/report"><i class="fa fa-chart-line"></i> Reports</a>
+		    <a href="${pageContext.request.contextPath}/settings"><i class="fa fa-cog"></i> Settings</a>
+		    <a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
+		</nav>
+
     </aside>
 
     <!-- Main -->

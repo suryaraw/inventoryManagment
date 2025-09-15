@@ -108,7 +108,7 @@ public class ReportGenerate {
 			mailService.sendEmailWithAttachment("surya.kanthanraja@gmail.com", "Inventory Report",
 					"Hi Suru ❤️, please find attached your latest inventory report.", pdfFile);
 
-			// 4️⃣ Pass attributes to JSP
+			// 4️⃣ Pass attributes to JSP	``````````````````````````
 			model.addAttribute("status", "success");
 			model.addAttribute("recipient", "surya.kanthanraja@gmail.com");
 			model.addAttribute("subject", "Inventory Report");
