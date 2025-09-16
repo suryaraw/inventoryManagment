@@ -59,12 +59,6 @@
             <div class="panel success-panel">
                 <h2><i class="fa-solid fa-check-circle" style="color:green"></i> Payment Successful</h2>
                 <p>Your payment was processed successfully!</p>
-                <ul>
-                    <li><strong>Order ID:</strong> ${param.orderId}</li>
-                    <li><strong>Payment ID:</strong> ${param.paymentId}</li>
-                    <li><strong>Signature:</strong> ${param.signature}</li>
-                </ul>
-                <a href="${pageContext.request.contextPath}/dashboard" class="btn">Back to Dashboard</a>
             </div>
         </div>
     </main>
