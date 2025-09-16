@@ -4,6 +4,8 @@
 <html>
 <head>
     <title>Inventory Management - Report</title>
+	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>

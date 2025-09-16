@@ -35,5 +35,15 @@ public class SupplierService {
 		return suprepo.findById(id);
 	}
 	
+	public void saveSupplier(Wholesaler supplier){
+		 suprepo.save(supplier);
+	}
 	
+	public void dltSupplier(Long id){
+		suprepo.deleteById(id);
+	}
+	
+	public List<Wholesaler> allSupplier() {
+		return suprepo.findAll();
+	}
 }

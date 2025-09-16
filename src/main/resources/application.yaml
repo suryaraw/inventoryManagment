@@ -8,7 +8,7 @@ spring:
 mvc:
   view:
     prefix: /WEB-INF/jsp/
-    suffix: .jsp	
+    suffix: .jsp  
 
 # Common actuator settings
 management:
@@ -20,6 +20,7 @@ management:
     export:
       simple:
         enabled: true
+
 logging:
   level:
     org.springframework: INFO
@@ -97,3 +98,28 @@ spring:
 logging:
   level:
     org.springframework: DEBUG
+
+---
+
+# Aravind profile
+spring:
+  config:
+    activate:
+      on-profile: aravind
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/inventorydb
+    username: root
+    password: A@rusql9787
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+logging:
+  level:
+    org.springframework: INFO
