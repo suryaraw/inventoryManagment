@@ -1,19 +1,34 @@
 package com.inventory.rootPackage.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+
+@Table(name = "payments")
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String razorpayOrderId;    // Razorpay's order id
-    private String razorpayPaymentId;  // Razorpay's payment id
-    private String razorpaySignature;  // Razorpay's signature
-    private Double amount;
+
+    private String orderId;
+    private String paymentId;
     private String status;
+    private Double amount;
+    
+    private String currency;
+    private String customerName;
+    private String customerEmail;
+    private String customerMob;
+    private String paymentMethod;
+    @Column(name = "timestamp")
+    private LocalDateTime timestamp;
+
+
+   
 }

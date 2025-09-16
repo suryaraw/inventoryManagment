@@ -3,7 +3,11 @@ spring:
   application:
     name: inventoryManagement
   profiles:
+<<<<<<< HEAD
     active: manish   # default active profile
+=======
+    active: nitin   # default active profile
+>>>>>>> 208f33e1f5bb890e71656e7ed2cd9e8d10f07421
 
 mvc:
   view:
@@ -83,7 +87,7 @@ spring:
       on-profile: nitin
 
   datasource:
-    url: jdbc:mysql://prod-server:3306/inventorydb
+    url: jdbc:mysql://localhost:3306/inventorydb
     username: root
     password: nitin6127
     driver-class-name: com.mysql.cj.jdbc.Driver

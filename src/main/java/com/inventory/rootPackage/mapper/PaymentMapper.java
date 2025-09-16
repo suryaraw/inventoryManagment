@@ -4,31 +4,38 @@ import com.inventory.rootPackage.dto.PaymentDTO;
 import com.inventory.rootPackage.model.PaymentEntity;
 
 
+//Helps in converting between DTO and Entity
+
 public class PaymentMapper {
+  public static PaymentEntity toEntity(PaymentDTO dto) {
+      PaymentEntity entity = new PaymentEntity();
+      entity.setOrderId(dto.getRazorpayOrderId());
+      entity.setPaymentId(dto.getRazorpayPaymentId());
+      entity.setStatus("PENDING"); // default
+      entity.setAmount(dto.getAmount());
+      
+      entity.setCurrency(dto.getCurrency());
+      entity.setPaymentMethod(dto.getPaymentMethod());
+      entity.setCustomerName(dto.getCustomerName());
+      entity.setCustomerEmail(dto.getCustomerEmail());
+      entity.setCustomerMob(dto.getCustomerMob());
+      entity.setTimestamp(dto.getTimestamp());
+      
+      return entity;
+  }
 
-    public static PaymentDTO toDTO(PaymentEntity entity) {
-        if (entity == null) return null;
-
-        return PaymentDTO.builder()
-                .id(entity.getId())
-                .razorpayOrderId(entity.getRazorpayOrderId())
-                .razorpayPaymentId(entity.getRazorpayPaymentId())
-                .razorpaySignature(entity.getRazorpaySignature())
-                .amount(entity.getAmount())
-                .status(entity.getStatus())
-                .build();
-    }
-
-    public static PaymentEntity toEntity(PaymentDTO dto) {
-        if (dto == null) return null;
-
-        PaymentEntity payment = new PaymentEntity();
-        payment.setId(dto.getId());
-        payment.setRazorpayOrderId(dto.getRazorpayOrderId());
-        payment.setRazorpayPaymentId(dto.getRazorpayPaymentId());
-        payment.setRazorpaySignature(dto.getRazorpaySignature());
-        payment.setAmount(dto.getAmount());
-        payment.setStatus(dto.getStatus());
-        return payment;
-    }
+  public static PaymentDTO toDTO(PaymentEntity entity) {
+      PaymentDTO dto = new PaymentDTO();
+      dto.setRazorpayOrderId(entity.getOrderId());
+      dto.setRazorpayPaymentId(entity.getPaymentId());
+      dto.setAmount(entity.getAmount());
+      
+      dto.setCurrency(entity.getCurrency());
+      dto.setPaymentMethod(entity.getPaymentMethod());
+      dto.setCustomerName(entity.getCustomerName());
+      dto.setCustomerEmail(entity.getCustomerEmail());
+      dto.setCustomerEmail(entity.getCustomerMob());
+      dto.setTimestamp(entity.getTimestamp());
+      return dto;
+  }
 }
