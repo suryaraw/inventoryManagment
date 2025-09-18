@@ -47,7 +47,7 @@ public class ReportGenerate {
 			List<Report> reports = reportService.getInventoryReport();
 
 			// 1️⃣ Dynamic PDF path
-			String pdfDir = "C:/Users/Surya/Downloads/";
+			String pdfDir = "C:/Users/HP/Downloads/";
 			String fileName = "inventory_report_" + System.currentTimeMillis() + ".pdf";
 			String pdfPath = pdfDir + fileName;
 			File pdfFile = new File(pdfPath);
@@ -105,10 +105,10 @@ public class ReportGenerate {
 			document.close();
 
 			// 3️⃣ Send email
-			mailService.sendEmailWithAttachment(/*"nitinbsundar@gmail.com"*//*"surya.kanthanraja@gmail.com"*/"way3samson@gmail.com", "Inventory Report",
+			mailService.sendEmailWithAttachment(/*"nitinbsundar@gmail.com"*/"surya.kanthanraja@gmail.com", "Inventory Report",
 					"Hi Suru ❤️, please find attached your latest inventory report.", pdfFile);
 
-			// 4️⃣ Pass attributes to JSP
+			// 4️⃣ Pass attributes to JSP	``````````````````````````
 			model.addAttribute("status", "success");
 			model.addAttribute("recipient", "way3samson@gmail.com");
 			model.addAttribute("subject", "Inventory Report");

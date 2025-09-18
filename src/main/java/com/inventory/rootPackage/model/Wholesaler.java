@@ -1,5 +1,6 @@
 package com.inventory.rootPackage.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -13,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "items")
-public class Wholesaler {
+public class Wholesaler implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,9 @@
 package com.inventory.rootPackage.controller;
 
 
+import java.time.LocalDateTime;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,43 +16,83 @@ import com.inventory.rootPackage.service.PaymentService;
 public class PaymentController {
 
     private final PaymentService paymentService;
-   
-    @Value("${razorpay.key.id}")
-    private String keyId;  // Inject Key ID here
 
     public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
     }
 
-    @GetMapping("/pay")
-    public String payPage(Model model) {
-    	// Pass Razorpay Key ID to JSP
-        model.addAttribute("razorpayKeyId", keyId);
-        return "payment";
+	/*
+	 * @GetMapping({"/", "/index"}) public String index() { return "index"; }
+	 */
+    
+    // 1. show checkout.jsp
+    @GetMapping("/checkout")
+    public String checkout(org.springframework.ui.Model model) {
+        model.addAttribute("razorpayKeyId", paymentService.getKeyId());
+        return "checkout"; // /WEB-INF/jsp/checkout.jsp
     }
 
-    @PostMapping("/createOrder")
+    // 2. create order
+    @PostMapping(value = "/createOrder", produces = "application/json")
     @ResponseBody
-    //used when you want to return JSON or plain text from a controller without this it will search for jsp
-    //instead of @Controller if we use @RestController we dont need @ResponseBody
     public String createOrder(@RequestParam Double amount) throws Exception {
-    	System.out.println("controller-createorder");
-    	System.out.println(paymentService.createOrder(amount));
         return paymentService.createOrder(amount);
     }
-    
-    @GetMapping("/paymentSuccess")
-    public String showPaymentSuccessPage() {
-        return "paymentSuccess";
-    }
 
+    // 3. verify payment
     @PostMapping("/paymentSuccess")
-    public String paymentSuccess(@ModelAttribute PaymentDTO paymentDTO, Model model) {
-        paymentDTO.setStatus("SUCCESS");
-        PaymentDTO savedPayment = paymentService.savePayment(paymentDTO);
-        model.addAttribute("msg", "Payment Successful! Transaction Id: " + savedPayment.getRazorpayPaymentId());
-        return "paymentSuccess"; // JSP page
+    @ResponseBody
+    public String paymentSuccess(@RequestParam String razorpayOrderId,
+                                 @RequestParam String razorpayPaymentId,
+                                 @RequestParam String razorpaySignature,
+                                 @RequestParam Double amount) throws Exception {
+
+        boolean valid = paymentService.verifyPayment(razorpayOrderId, razorpayPaymentId, razorpaySignature);
+        System.out.println("payment-signature-verify:"+valid);
+        
+        //fetch details from razorpay
+        JSONObject paymentJson = paymentService.fetchPaymentDetails(razorpayPaymentId);
+        
+        
+
+        String method = paymentJson.getString("method");       // card, upi, netbanking, etc.
+        String email = paymentJson.optString("email");        // customer email
+        String contact = paymentJson.optString("contact");    // phone number
+        String name = paymentJson.optString("customer_name"); 
+        
+        
+        PaymentDTO dto = new PaymentDTO();
+        dto.setRazorpayOrderId(razorpayOrderId);
+        dto.setRazorpayPaymentId(razorpayPaymentId);
+        dto.setRazorpaySignature(razorpaySignature);
+        dto.setAmount(amount); 
+        
+        dto.setCurrency("INR");
+        dto.setCustomerName(name);
+        dto.setCustomerEmail(email);
+        dto.setCustomerMob(contact);
+        dto.setPaymentMethod(method);
+        dto.setTimestamp(LocalDateTime.now()); 
+
+        
+        if (valid) {
+        	paymentService.savePayment(dto, "SUCCESS");
+        	//save raw json response
+        paymentService.savePaymentResponse(razorpayOrderId, razorpayPaymentId, paymentJson.toString(),LocalDateTime.now());
+        	System.out.println("payment verified!!");
+            return "Payment Verified! OrderId=" + razorpayOrderId;
+        } else {
+			/*
+			 * paymentService.savePayment(dto, "FAILED"); return
+			 * "Payment Verification Failed!";
+			 */
+        	paymentService.savePayment(dto, "PENDING");
+            return "Your payment is being verified. If the amount was deducted, it will be automatically updated in our system within 24 hours.";
+        }
     }
     
-    
+    @GetMapping({"/paymentSuccess"})
+    public String Success() {
+    	return "paymentSuccess";
+    	}
 }

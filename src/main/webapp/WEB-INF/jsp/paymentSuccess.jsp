@@ -58,7 +58,7 @@
         <div class="content">
             <div class="panel success-panel">
                 <h2><i class="fa-solid fa-check-circle" style="color:green"></i> Payment Successful</h2>
-                <p>Your payment was processed successfully!</p>              	
+                <p>Your payment was processed successfully!</p> 
             </div>
         </div>
     </main>
