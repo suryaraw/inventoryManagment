@@ -6,10 +6,10 @@ import com.inventory.rootPackage.dto.ItemDTO;
 
 
 
-public interface ItemService {
-	
-	ItemDTO saveItem(ItemDTO item);
-	List<ItemDTO> getAllItems();
-	
-
-}
+//public interface ItemService {
+//	
+//	ItemDTO saveItem(ItemDTO item);
+//	List<ItemDTO> getAllItems();
+//	
+//
+//}

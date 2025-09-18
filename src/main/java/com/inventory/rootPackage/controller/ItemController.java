@@ -19,7 +19,6 @@ import com.inventory.rootPackage.mapper.ItemMapper;
 import com.inventory.rootPackage.model.Item;
 import com.inventory.rootPackage.model.Wholesaler;
 import com.inventory.rootPackage.service.ItemAddService;
-import com.inventory.rootPackage.service.ItemService;
 import com.inventory.rootPackage.service.SupplierService;
 
 @Controller
@@ -34,12 +33,6 @@ public class ItemController {
 		this.supplierservice = supplierservice;
 		this.itemaddservice = itemaddservice;
 	}
-
-//	@GetMapping("/items/add")
-//	public String showAddItemForm(Model model) {
-//	    model.addAttribute("item", new Item());
-//	    return "addItem";
-//	}
 
 	/*
 	 * @PostMapping("/items/save") public String saveItem(@ModelAttribute("item")

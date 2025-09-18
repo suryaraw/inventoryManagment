@@ -1,5 +1,6 @@
 package com.inventory.rootPackage.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
@@ -11,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 
 @Table(name = "payments")
-public class PaymentEntity {
+public class PaymentEntity implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

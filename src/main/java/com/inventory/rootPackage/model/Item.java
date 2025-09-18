@@ -1,5 +1,6 @@
 package com.inventory.rootPackage.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,7 +23,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "supplier")
-public class Item {
+public class Item implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

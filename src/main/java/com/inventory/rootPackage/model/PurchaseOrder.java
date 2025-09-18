@@ -1,4 +1,6 @@
 package com.inventory.rootPackage.model;
+import java.io.Serializable;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -6,7 +8,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PurchaseOrder {
+public class PurchaseOrder implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.inventory.rootPackage.model.Item;
@@ -31,18 +34,21 @@ public class SupplierService {
 		return suprepo.findAll();
 	}
 	
+	@Cacheable(value = "supplier" , key = "#id")
 	public Optional<Wholesaler> getSupplier(Long id){
 		return suprepo.findById(id);
 	}
 	
+	@CachePut(value = "supplier" , key = "#supplier.id")
 	public void saveSupplier(Wholesaler supplier){
 		 suprepo.save(supplier);
 	}
 	
+	@CacheEvict(value = "supplier" , key = "#id")
 	public void dltSupplier(Long id){
 		suprepo.deleteById(id);
 	}
-	
+	@Cacheable(value = "suppliers")
 	public List<Wholesaler> allSupplier() {
 		return suprepo.findAll();
 	}

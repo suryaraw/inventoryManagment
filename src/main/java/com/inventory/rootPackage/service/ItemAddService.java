@@ -5,7 +5,11 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +29,8 @@ public class ItemAddService {
 
 	@Autowired
 	private  SupplierRepo supRepo;
-
+	
+	@CachePut(value = "item" ,key = "#item.id")
 	public Item saveItem(Item item){
 		return itemRepo.save(item);
 	}
@@ -80,10 +85,12 @@ public class ItemAddService {
 		return itemRepo.findAll(limit);
 	}
 	
+	@Cacheable(value = "item" , key = "#id")
 	public Item getbyId(Long id) {
 		return itemRepo.findById(id).get();
 	}
 	
+	@CacheEvict(value = "item" , key = "#id")
 	public void deleteItem(Long id) {
 		itemRepo.deleteById(id);
 	}
