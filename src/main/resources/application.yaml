@@ -3,11 +3,7 @@ spring:
   application:
     name: inventoryManagement
   profiles:
-<<<<<<< HEAD
     active: manish   # default active profile
-=======
-    active: nitin   # default active profile
->>>>>>> 208f33e1f5bb890e71656e7ed2cd9e8d10f07421
 
 mvc:
   view:

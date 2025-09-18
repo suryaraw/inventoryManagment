@@ -47,7 +47,7 @@ public class ReportGenerate {
 			List<Report> reports = reportService.getInventoryReport();
 
 			// 1️⃣ Dynamic PDF path
-			String pdfDir = "C:/Users/Surya/Downloads/";
+			String pdfDir = "C:/Users/HP/Downloads/";
 			String fileName = "inventory_report_" + System.currentTimeMillis() + ".pdf";
 			String pdfPath = pdfDir + fileName;
 			File pdfFile = new File(pdfPath);
@@ -105,12 +105,12 @@ public class ReportGenerate {
 			document.close();
 
 			// 3️⃣ Send email
-			mailService.sendEmailWithAttachment("surya.kanthanraja@gmail.com", "Inventory Report",
-					"Hi Suru ❤️, please find attached your latest inventory report.", pdfFile);
+			mailService.sendEmailWithAttachment("manigapathykc@gmail.com", "Inventory Report",
+					"Hi Manish, please find attached your latest inventory report.", pdfFile);
 
 			// 4️⃣ Pass attributes to JSP	``````````````````````````
 			model.addAttribute("status", "success");
-			model.addAttribute("recipient", "surya.kanthanraja@gmail.com");
+			model.addAttribute("recipient", "manigapathykc@gmail.com");
 			model.addAttribute("subject", "Inventory Report");
 			model.addAttribute("message", "Mail with PDF sent successfully!");
 			model.addAttribute("errorDetails", null);
@@ -119,7 +119,7 @@ public class ReportGenerate {
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("status", "failure");
-			model.addAttribute("recipient", "surya.kanthanraja@gmail.com");
+			model.addAttribute("recipient", "manigapathykc@gmail.com");
 			model.addAttribute("subject", "Inventory Report");
 			model.addAttribute("message", "Failed to send mail with PDF.");
 			model.addAttribute("errorDetails", e.getMessage());
