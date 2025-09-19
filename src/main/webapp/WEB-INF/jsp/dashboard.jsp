@@ -47,8 +47,15 @@
 		            <a href="${pageContext.request.contextPath}/sup/all">View Suppliers</a>
 		        </div>
 		    </div>
+			<!-- Orders Dropdown -->
+			<div class="dropdown">
+			    <a href="#"><i class="fa fa-shopping-cart"></i> Orders ▾</a>
+			    <div class="dropdown-content">
+			        <a href="${pageContext.request.contextPath}/orders/order">All Orders</a>
+			        <a href="${pageContext.request.contextPath}/orders/dispatched">Dispatched</a>
+			    </div>
+			</div>
 
-            <a href="${pageContext.request.contextPath}/orders"><i class="fa fa-shopping-cart"></i> Orders</a>
 			<a href="${pageContext.request.contextPath}/checkout"><i class="fa fa-credit-card"></i> Payments</a>
             <a href="${pageContext.request.contextPath}/report"><i class="fa fa-chart-line"></i> Reports</a>
             <a href="${pageContext.request.contextPath}/settings"><i class="fa fa-cog"></i> Settings</a>

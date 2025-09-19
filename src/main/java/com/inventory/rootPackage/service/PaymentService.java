@@ -91,4 +91,8 @@ public class PaymentService {
 
         paymentResponseRepo.save(response);
     }
+
+	public PaymentEntity getPayment(String id) {
+		return repo.getPaymentDetails(id).orElseThrow(null);
+	}
 }

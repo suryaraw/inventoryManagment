@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,8 +19,10 @@ import jakarta.servlet.http.HttpServletRequest;
 @Service
 public class ShopkeeperService {
 	
+	public static List<ItemDTO> pickedlist =null;
+	
 	@Autowired
-	private ItemRepository itemrepo;
+	private  ItemRepository itemrepo;
 	
 	
 	
@@ -33,11 +36,11 @@ public class ShopkeeperService {
 	@RequestParam List<Long> ids → multiple values for the same parameter name (checkbox list)
     */
 //	Map<String, String[]> map= request.getParameterMap();
-	public ModelAndView picked(HttpServletRequest request,ModelAndView model) {
-		List<ItemDTO> pickedlist = new ArrayList<ItemDTO>();
+	public  ModelAndView picked(HttpServletRequest request,ModelAndView model) {
+		 pickedlist = new ArrayList<ItemDTO>();
 		pickedlist.clear();
 		String[] value = request.getParameterValues("picked");
-		Double total =0.0;
+		Double total =0.0,forRazor = 0.0;
 		for(int i=0;i<value.length;i++) {
 			Long id=Long.parseLong(value[i]);
 			Integer quantity=Integer.parseInt(request.getParameter("quantity_"+value[i]));
@@ -51,13 +54,18 @@ public class ShopkeeperService {
 			total += amount;
 			System.out.println(selected);
 		}
+		if(total>100000) {
+				forRazor = 100000d;
+		}else {forRazor = total;}
 		model.addObject("selectedItem",pickedlist);
 		model.addObject("orderSum",total);
+		model.addObject("forRazor",forRazor);
 		model.setViewName("picked");
 		return model;
 		
 	}
 	
+	@Cacheable(value = "Items")
 	public List<ItemDTO> getAllItems(){
 		LinkedList<ItemDTO> list =new LinkedList<ItemDTO>();
 		for(Item item:itemrepo.findAll()) {

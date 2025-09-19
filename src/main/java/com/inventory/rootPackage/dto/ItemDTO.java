@@ -1,6 +1,7 @@
 package com.inventory.rootPackage.dto;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemDTO {
+public class ItemDTO implements Serializable{
 	
     private Long id;
     private String name;
