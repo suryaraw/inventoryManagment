@@ -2,6 +2,7 @@ package com.inventory.rootPackage.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,6 +30,9 @@ public class PaymentEntity implements Serializable{
     private String paymentMethod;
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
+    
+    @OneToMany(mappedBy = "paymentId", cascade = CascadeType.ALL)
+    private List<ShoperPaid> orderedItems; 
 
 
    

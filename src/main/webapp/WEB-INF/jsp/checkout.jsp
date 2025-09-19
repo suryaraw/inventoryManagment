@@ -39,7 +39,6 @@
 	            <a href="${pageContext.request.contextPath}/logout"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
 	        </nav>
 	    </aside>
-
 	    <!-- Main -->
 	    <main class="main">
 	        <div class="topbar">
@@ -58,13 +57,14 @@
 	        <div class="content">
 	            <div class="panel">
 	                <h2>Make a Payment</h2>
-	                <p>Enter the amount and click pay.</p>
+					
+					<form id="paymentForm">
+					    <label for="amount">Amount (INR):</label>
+						<input type="hidden" name="orderSum" value="${orderSum}" />
+					    <input type="number" id="amount" name="amount" min="1" required value="${forRazor}" readonly />
+					    <button type="button" id="payBtn" class="btn">Proceed Payment</button>
+					</form>
 
-	                <form id="paymentForm">
-	                    <label for="amount">Amount (INR):</label>
-	                    <input type="number" id="amount" name="amount" min="1" required />
-	                    <button type="button" id="payBtn" class="btn">Pay with Razorpay</button>
-	                </form>
 	            </div>
 	        </div>
 	    </main>
@@ -84,7 +84,7 @@
             // Call backend to create order
             $.post("${pageContext.request.contextPath}/createOrder", {amount: amount}, function (order) {
                 var orderObj = typeof order === 'string' ? JSON.parse(order) : order;
-
+				
                 var options = {
                     "key": "${razorpayKeyId}", 
                     "amount": orderObj.amount, 
@@ -93,14 +93,15 @@
                     "order_id": orderObj.id, // generated from backend
                     "handler": function (response) {
                         // send details back to backend
-						alert("OrderId: " + response.razorpay_order_id +
-										          "\nPaymentId: " + response.razorpay_payment_id +
-										          "\nSignature: " + response.razorpay_signature);
+						   //alert("OrderId: " + response.razorpay_order_id +
+								//		          "\nPaymentId: " + response.razorpay_payment_id +
+								//		          "\nSignature: " + response.razorpay_signature);
                         $.post("${pageContext.request.contextPath}/paymentSuccess", {
                             razorpayOrderId: response.razorpay_order_id,
                             razorpayPaymentId: response.razorpay_payment_id,
                             razorpaySignature: response.razorpay_signature,
-                            amount: amount
+                            amount: amount,
+							orderSum: $("input[name='orderSum']").val() 
                         }, function (msg) {
                             alert(msg);
 							window.location.href = "${pageContext.request.contextPath}/paymentSuccess";

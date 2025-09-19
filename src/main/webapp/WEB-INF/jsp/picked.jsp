@@ -79,9 +79,14 @@
         </form>
 
         <!-- Purchase Order button -->
-        <form action="${pageContext.request.contextPath}/purchaseOrder" method="post">
-            <button type="submit" class="btn btn-primary">Generate Purchase Order <i class="fa fa-arrow-right"></i></button>
-        </form>
+        
+		<form action="${pageContext.request.contextPath}/checkout" method="post">
+		    <input type="hidden" name="orderSum" value="${orderSum}" />
+		    <input type="hidden" name="forRazor" value="${forRazor}" />
+		    <button type="submit" class="btn btn-primary">
+		        Generate Purchase Order <i class="fa fa-arrow-right"></i>
+		    </button>
+		</form>
     </div>
 </div>
 
