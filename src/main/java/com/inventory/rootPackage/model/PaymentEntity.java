@@ -11,6 +11,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "orderedItems")
 
 @Table(name = "payments")
 public class PaymentEntity implements Serializable{
