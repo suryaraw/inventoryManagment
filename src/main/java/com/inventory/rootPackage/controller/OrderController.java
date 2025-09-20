@@ -24,14 +24,21 @@ public class OrderController {
 	@GetMapping("/order")
 	public String getOrders(Model model) {
 		model.addAttribute("orders" , service.getByNotYet());
-		System.out.println(service.getByNotYet());
+//		System.out.println(service.getByNotYet());
 		return "ordered";
 	}
 	
 	@GetMapping("/dispatched")
 	public String getOrdersDispatch(Model model) {
 		model.addAttribute("orders" , service.getByDiapatched());
-		System.out.println(service.getByDiapatched());
+//		System.out.println(service.getByDiapatched());
 		return "dispatched";
+	}
+	
+	@GetMapping("/insufficient")
+	public String getOrdersInsufficient(Model model) {
+		model.addAttribute("groupedOrders" , service.getByInsufficientGroupedByBrand());
+		System.out.println(service.getByInsufficientGroupedByBrand());
+		return "insufficient";
 	}
 }

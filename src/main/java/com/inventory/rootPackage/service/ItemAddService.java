@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -16,8 +15,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.inventory.rootPackage.model.Item;
+import com.inventory.rootPackage.model.ShoperPaid;
 import com.inventory.rootPackage.model.Wholesaler;
 import com.inventory.rootPackage.repository.ItemRepository;
+import com.inventory.rootPackage.repository.OrderRepo;
 import com.inventory.rootPackage.repository.SupplierRepo;
 
 @Service
@@ -26,6 +27,8 @@ public class ItemAddService {
 	@Autowired
 	private ItemRepository itemRepo;
 	
+	@Autowired
+	private OrderRepo orderrepo;
 
 	@Autowired
 	private  SupplierRepo supRepo;
@@ -93,5 +96,20 @@ public class ItemAddService {
 	@CacheEvict(value = "item" , key = "#id")
 	public void deleteItem(Long id) {
 		itemRepo.deleteById(id);
+	}
+	
+	public String modifyQuantity(Long id,Integer quantity,Long PaymentId) {
+		Item item =itemRepo.findById(id).get();
+		if(item.getQuantity()>quantity) {
+			item.setQuantity(item.getQuantity()-quantity);
+			System.out.println("item pa "+  item);
+			itemRepo.save(item);
+			ShoperPaid sp=orderrepo.findByItemIdAndPayment(id, PaymentId).get();
+			sp.setDispatchStatus("Dispatched");
+			System.out.println("shoper  " + sp);
+			orderrepo.save(sp);
+			return "success";
+		}
+		return null;
 	}
 }

@@ -11,7 +11,7 @@ public class PurchaseOrderDTO {
     private String orderDate;
     private String status;
 
-    private String retailerName;
+//    private String retailerName;
     private String wholesalerName;
     private String itemName;
 
