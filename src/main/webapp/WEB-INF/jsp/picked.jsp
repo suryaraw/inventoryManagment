@@ -77,9 +77,7 @@
         <form action="${pageContext.request.contextPath}/shop/items" method="get">
             <button type="submit" class="btn"><i class="fa fa-arrow-left"></i> Back</button>
         </form>
-
         <!-- Purchase Order button -->
-        
 		<form action="${pageContext.request.contextPath}/checkout" method="post">
 		    <input type="hidden" name="orderSum" value="${orderSum}" />
 		    <input type="hidden" name="forRazor" value="${forRazor}" />
