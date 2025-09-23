@@ -1,37 +1,43 @@
 package com.inventory.rootPackage.controller;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.inventory.rootPackage.dto.ItemDTO;
-import com.inventory.rootPackage.mapper.ItemMapper;
 import com.inventory.rootPackage.model.Item;
+import com.inventory.rootPackage.model.ShoperPaid;
 import com.inventory.rootPackage.model.Wholesaler;
 import com.inventory.rootPackage.service.ItemAddService;
+import com.inventory.rootPackage.service.OrderService;
 import com.inventory.rootPackage.service.SupplierService;
 
 @Controller
 public class ItemController {
 
+    private final OrderController orderController;
+
 	private final SupplierService supplierservice;
 
 	private final ItemAddService itemaddservice;
+	
+	private final	OrderService orderservice;
 
-	public ItemController(SupplierService supplierservice, ItemAddService itemaddservice) {
+	public ItemController(SupplierService supplierservice, ItemAddService itemaddservice, OrderService orderservice, OrderController orderController) {
 
 		this.supplierservice = supplierservice;
 		this.itemaddservice = itemaddservice;
+		this.orderservice = orderservice;
+		this.orderController = orderController;
 	}
 
 	/*
@@ -100,5 +106,32 @@ public class ItemController {
 		itemaddservice.deleteItem(id);
 		return "redirect:/items";
 	}
+	
+	@PostMapping("approve/{id}/{quantity}/{paymentId}")
+	@ResponseBody
+	public Map<String, Object> approve(@PathVariable Long id, @PathVariable Integer quantity, @PathVariable Long paymentId) {
+		System.out.println("method called");
+	    Map<String, Object> response = new HashMap<>();
+	    String result = itemaddservice.modifyQuantity(id, quantity ,paymentId);
+	    System.out.println(result);
+	    if ("success".equals(result)) {
+	        response.put("success", true);
+	    } else {
+	        response.put("success", false);
+	    }
+
+	    return response;
+	}
+	
+	@GetMapping("/sendFailureMail/{id}")
+	public String sendFailureMail(@PathVariable Integer id ) {
+		System.out.println(id);
+		ShoperPaid sp=orderservice.getById(id);
+		sp.setDispatchStatus("Insufficient");
+		orderservice.saveOrder(sp);
+		System.out.println("acsddfv");
+	    return "redirect:/orders/order";  // or a JSP page
+	}
+
 
 }

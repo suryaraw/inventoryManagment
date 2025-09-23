@@ -52,4 +52,10 @@ public class SupplierService {
 	public List<Wholesaler> allSupplier() {
 		return suprepo.findAll();
 	}
+	
+	@Cacheable(value = "supplier" , key = "#name")
+	public Optional<Wholesaler> getSupplier(String name){
+		return suprepo.findByName(name);
+	}
+	
 }

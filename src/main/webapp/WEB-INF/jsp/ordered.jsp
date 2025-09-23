@@ -76,6 +76,34 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
     </style>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
+		<script>
+		   const contextPath = "${pageContext.request.contextPath}";
+		   function approve(itemId, quantity, paymentId, s_no) {
+		       const btn = document.getElementById("approve-btn-" + itemId);
+
+		       fetch(contextPath + "/approve/" + itemId + "/" + quantity + "/" + paymentId, {
+		           method: "POST"
+		       })
+		       .then(response => response.json())
+		       .then(data => {
+		           if (data.success) {
+		               Swal.fire("Approved!", "Order approved successfully!", "success")
+		                   .then(() => location.reload());
+		           } else {
+		               Swal.fire("Rejected!", "Insufficient stock.", "error");
+		               // turn button into "Mail"
+		               btn.textContent = "Mail";
+		               btn.classList.remove("approve");
+		               btn.classList.add("mail-btn");
+		               btn.onclick = function() {
+		                   window.location.href = contextPath + "/sendFailureMail/" + s_no;
+		               };
+		           }
+		       });
+		   }
+		</script>
 </head>
 <body>
 <div class="app">
@@ -118,10 +146,17 @@
                         <td>${order.overall}</td>
                         <td>${order.paymentId.id}</td>
                         <td>${order.dispatchStatus}</td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/orders/approve/${order.s_no}" 
-                               class="action-btn approve">Approve</a>
-                        </td>
+						<td>
+						    <
+							<button type="button"
+							        class="action-btn approve"
+							        id="approve-btn-${order.item_id}"
+							        onclick="approve('${order.item_id}', '${order.quantity}', '${order.paymentId.id}', '${order.s_no}')">
+							    Approve
+							</button>
+
+						</td>
+
                     </tr>
                 </c:forEach>
             </tbody>
