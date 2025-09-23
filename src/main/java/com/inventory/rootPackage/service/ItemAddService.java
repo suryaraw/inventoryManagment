@@ -1,10 +1,12 @@
 package com.inventory.rootPackage.service;
 
 
+import java.lang.System.Logger;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -24,6 +26,8 @@ import com.inventory.rootPackage.repository.SupplierRepo;
 @Service
 public class ItemAddService {
 	
+	private final org.slf4j.Logger log = LoggerFactory.getLogger(ItemAddService.class);
+	
 	@Autowired
 	private ItemRepository itemRepo;
 	
@@ -35,12 +39,14 @@ public class ItemAddService {
 	
 	@CachePut(value = "item" ,key = "#item.id")
 	public Item saveItem(Item item){
+		log.info("item saved");
 		return itemRepo.save(item);
 	}
 	
 
 	public void addSampleItems() {
 		if(itemRepo.findAll().isEmpty()) {
+			log.info("items added manually");
 			
 			 Wholesaler prestige = supRepo.findById((long) 1).orElseThrow();
 			    Wholesaler samsung  = supRepo.findById((long) 2).orElseThrow();
@@ -84,17 +90,21 @@ public class ItemAddService {
 	}
 	
 	public Page<Item> itemList(Integer page ,Integer data){
+		log.debug("pagination by 10 datas per page" ,page,data);
+		
 		Pageable limit = (Pageable) PageRequest.of(page, data);
 		return itemRepo.findAll(limit);
 	}
 	
 	@Cacheable(value = "item" , key = "#id")
 	public Item getbyId(Long id) {
+		log.info("item rerived with id", id);
 		return itemRepo.findById(id).get();
 	}
 	
 	@CacheEvict(value = "item" , key = "#id")
 	public void deleteItem(Long id) {
+		log.info("item deleted with id", id);
 		itemRepo.deleteById(id);
 	}
 	
@@ -110,6 +120,8 @@ public class ItemAddService {
 			orderrepo.save(sp);
 			return "success";
 		}
+		log.trace("item is retrived by id and check quantity if vailable decrease the quantity "
+				+ "else it goes to mail (button) null", id);
 		return null;
 	}
 }

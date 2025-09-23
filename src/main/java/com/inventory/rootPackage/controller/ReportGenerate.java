@@ -26,7 +26,10 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class ReportGenerate {
 
 	@Autowired
@@ -120,7 +123,7 @@ public class ReportGenerate {
 
 			document.close();
 			writer.close();
-
+			log.debug("pdf is crated for the report from order db");
 			// 7️⃣ Send email
 			mailService.sendEmailWithAttachment("manigapathykc@gmail.com", "Inventory Report",
 					"Hi Manish ❤️, please find attached your latest inventory report.", pdfFile);
@@ -141,6 +144,7 @@ public class ReportGenerate {
 			model.addAttribute("message", "Failed to send mail with PDF.");
 			model.addAttribute("errorDetails", e.getMessage());
 			model.addAttribute("now", new Date());
+			log.error("cannot send email something went wrong may be wrong  mail");
 		}
 
 		return "ConfirmationMail";
@@ -220,12 +224,14 @@ public class ReportGenerate {
 
 			document.close();
 			writer.close();
-
+			
+			log.debug("pdf created for requested supplier" + mail);
 			// 7️⃣ Send email
 			mailService.sendEmailWithAttachment(mail, "Inventory Report",
 					subject, pdfFile);
 
 		} catch (Exception e) {
+			log.error("exception occured for invalid crdentials may be null value or ip mismatch on sending mail to supplier");
 			e.printStackTrace();
 		}
 		return "ConfirmationMail";

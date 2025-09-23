@@ -130,8 +130,8 @@
 		
 		</form>
         <div class="extra-links" style="margin-top:15px;">
-            <a href="forgotPassword.jsp">Forgot Password?</a> | 
-            <a href="createAccount.jsp">Create Account</a>
+            <a href="/forgotPassword">Forgot Password?</a> | 
+            <a href="/createAccount">Create Account</a>
         </div>
     </div>
 </body>

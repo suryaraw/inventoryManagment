@@ -85,4 +85,14 @@ public class AuthController {
         model.addAttribute("message", "Account created successfully! You can login now.");
         return "login";
     }
+    
+    @GetMapping("/forgotPassword")
+    public String forgotPasswordPage() {
+        return "forgotPassword"; // Spring will map to /WEB-INF/jsp/forgotPassword.jsp
+    }
+
+    @GetMapping("/createAccount")
+    public String createAccountPage() {
+        return "createAccount"; // Spring will map to /WEB-INF/jsp/createAccount.jsp
+    }
 }

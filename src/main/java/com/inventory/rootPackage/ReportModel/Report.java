@@ -11,5 +11,4 @@ public class Report {
 	private String itemName;
 	private int totalStock;
 	private int sold;
-
 }

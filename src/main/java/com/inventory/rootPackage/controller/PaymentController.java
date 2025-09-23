@@ -97,8 +97,8 @@ public class PaymentController {
         paymentService.savePaymentResponse(razorpayOrderId, razorpayPaymentId, paymentJson.toString(),LocalDateTime.now());
         	System.out.println("payment verified!!");
         	orderSent(ShopkeeperService.pickedlist,amount,orderSum,razorpayOrderId);
-//            return "Payment Verified! OrderId=" + razorpayOrderId;
-        		return null;
+            return "Payment Verified! OrderId=" + razorpayOrderId;
+//        		return null;
         } else {
 			/*
 			 * paymentService.savePayment(dto, "FAILED"); return

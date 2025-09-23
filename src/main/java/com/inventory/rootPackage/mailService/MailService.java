@@ -2,6 +2,8 @@ package com.inventory.rootPackage.mailService;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 
 @Service
+@Slf4j
 public class MailService {
 
     @Autowired
@@ -49,5 +52,6 @@ public class MailService {
         }
 
         mailSender.send(mimeMessage);
+        log.debug("created pdf sended to mail "+to );
     }
 }

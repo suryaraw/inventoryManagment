@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -16,7 +18,10 @@ import com.inventory.rootPackage.repository.ItemRepository;
 import com.inventory.rootPackage.repository.OrderRepo;
 import com.inventory.rootPackage.repository.PurchaseOrderRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class PurchaseOrderService {
 
     private final ReportGenerate reportGenerate;
@@ -51,9 +56,11 @@ public class PurchaseOrderService {
 	            suprepo.save(order);
 	        });
 	    });
+	    log.info("modifying to \"NotYet\" from rederrepo db" );
 	}
 	
 	public String generateRestockRequestEmail(String supplierName) {
+		log.info("setting a request format dynamically");
 	    return "Subject: Restock Request – Insufficient Inventory for " + supplierName + " Items\n\n" +
 	           "Dear " + supplierName + " Supplier,\n\n" +
 	           "Please find below the list of items that are currently insufficient in our stock:" +
@@ -63,7 +70,7 @@ public class PurchaseOrderService {
 	}
 
 	
-	
+	@CachePut(value = "order")
 	public void saveReport(String supplier,List<Long> ids,List<Integer> nQuantity,Model model) {
 		List<PurchaseOrderDTO> list = new LinkedList<PurchaseOrderDTO>();
 		list.clear();
@@ -89,7 +96,7 @@ public class PurchaseOrderService {
 			tomail.setNeeded(quantity);tomail.setStock(item.getQuantity());
 			list.add(tomail);
 		}
-		
+		log.trace("sending mail to supplier eith respective id with dto and saved to PurchaseOrderrepo");
 		asservice.generatePdfAndSendEmail( model, list, supservice.getSupplierMail(supplier), generateRestockRequestEmail(supplier));
 	}
 
