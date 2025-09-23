@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+=<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -56,7 +56,7 @@
 			    </div>
 			</div>
 
-			<a href="${pageContext.request.contextPath}/orders/insufficient"><i class="fa fa-credit-card"></i>📦📊 Stock Manage</a>
+			<a href="${pageContext.request.contextPath}/orders/insufficient"><!--<i class="fa fa-credit-card">--></i>📦📊 Stock Manage</a>
             <a href="${pageContext.request.contextPath}/report"><i class="fa fa-chart-line"></i> Reports</a>
             <a href="${pageContext.request.contextPath}/settings"><i class="fa fa-cog"></i> Settings</a>
             <a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>

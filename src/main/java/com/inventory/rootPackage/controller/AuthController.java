@@ -66,6 +66,8 @@ public class AuthController {
     // ========== NEW FEATURES ==========
 
     // Handle Forgot Password
+    
+    
     @PostMapping("/forgot-password")
     public String forgotPassword(@RequestParam String email, Model model) {
         // TODO: Add your email check + reset password logic

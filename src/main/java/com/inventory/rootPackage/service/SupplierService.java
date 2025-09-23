@@ -58,4 +58,8 @@ public class SupplierService {
 		return suprepo.findByName(name);
 	}
 	
+	public String getSupplierMail(String name) {
+		return suprepo.findByName(name).get().getEmail();
+	}
+	
 }
