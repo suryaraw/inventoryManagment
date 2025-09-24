@@ -103,7 +103,7 @@
                             amount: amount,
 							orderSum: $("input[name='orderSum']").val() 
                         }, function (msg) {
-                            alert(msg);
+                            //alert(msg);
 							window.location.href = "${pageContext.request.contextPath}/paymentSuccess";
                         });
                     }

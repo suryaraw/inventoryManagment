@@ -1,9 +1,7 @@
 package com.inventory.rootPackage.service;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +10,10 @@ import com.inventory.rootPackage.mapper.ItemMapper;
 import com.inventory.rootPackage.model.Item;
 import com.inventory.rootPackage.repository.ItemRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j// from lombok 
 public class ItemsDropdownService {
 
 	private final ItemRepository itemRepo;
@@ -45,6 +46,7 @@ public class ItemsDropdownService {
 	 */
 	@Cacheable(value = "item" , key = "#item.id")
 	public ItemDTO saveItem(ItemDTO itemDTO) {
+		log.info("item saved to DB");
         Item item = ItemMapper.toEntity(itemDTO);
 
         // Business rule: default purchase date = today
@@ -53,6 +55,7 @@ public class ItemsDropdownService {
         }
 
         Item saved = itemRepo.save(item);
+        
         return ItemMapper.toDTO(saved);
     }
 

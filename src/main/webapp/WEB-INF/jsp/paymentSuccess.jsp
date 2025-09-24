@@ -54,7 +54,6 @@
                 <div id="adminAvatar" class="avatar"></div>
             </div>
         </div>
-
         <div class="content">
             <div class="panel success-panel">
                 <h2><i class="fa-solid fa-check-circle" style="color:green"></i> Payment Successful</h2>

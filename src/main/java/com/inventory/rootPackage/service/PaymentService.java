@@ -8,16 +8,20 @@ import com.inventory.rootPackage.repository.PaymentRepository;
 import com.inventory.rootPackage.repository.PaymentResponseRepository;
 import com.razorpay.*;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.LocalDateTime;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 
 @Service
+@Slf4j
 public class PaymentService {
 	
 	 @Value("${razorpay.key.id}")
@@ -49,6 +53,7 @@ public class PaymentService {
 
         Order order = client.orders.create(orderRequest);
         System.out.println(order.toString());
+        log.debug("validating the client in razorpay api by own method ");
         return order.toString(); // returns JSON with id, amount etc
     }
 
@@ -61,27 +66,34 @@ public class PaymentService {
     public boolean verifyPayment(String orderId, String paymentId, String signature) {
         try {
             String data = orderId + "|" + paymentId;
+            log.debug("verifing the payment by rayzerpay api as a boolean");
             return Utils.verifySignature(data, signature, KEY_SECRET);
         } catch (Exception e) {
+        	log.error("data and razorpay signature or secret key wrong declined",signature+""+KEY_SECRET);
             return false;
         }
     }
 
     // Save to DB
+    @CachePut(value = "payment" )
     public void savePayment(PaymentDTO dto, String status) {
         PaymentEntity entity = PaymentMapper.toEntity(dto);
         entity.setStatus(status);
         repo.save(entity);
+        log.info("saving payment to db");
     }
 
     //fetch payment details from razorpay
     public JSONObject fetchPaymentDetails(String paymentId) throws Exception {
         RazorpayClient client = new RazorpayClient(KEY_ID, KEY_SECRET);
         Payment payment = client.payments.fetch(paymentId);
+        log.debug("fetching payment details from Razorpayment");
         return payment.toJson(); // returns full JSON
     }
     
     //save response
+    
+    @CachePut(value = "paymentResponse" )
     public void savePaymentResponse(String orderId, String paymentId, String responseJson,LocalDateTime timestamp) {
         PaymentResponseEntity response = new PaymentResponseEntity();
         response.setOrderId(orderId);
@@ -90,9 +102,12 @@ public class PaymentService {
         response.setTimestamp(timestamp);
 
         paymentResponseRepo.save(response);
+        log.debug("saving payment response details from Razorpayment");
     }
-
+    
+    @Cacheable(value = "payment",key = "#id")
 	public PaymentEntity getPayment(String id) {
+    		log.info("geting payment by id");
 		return repo.getPaymentDetails(id).orElseThrow(null);
 	}
 }

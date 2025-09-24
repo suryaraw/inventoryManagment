@@ -130,4 +130,34 @@ public class AuthController {
 		return "reset2";
 	}
 
+    // Handle Forgot Password
+    
+    
+    @PostMapping("/forgot-password")
+    public String forgotPassword(@RequestParam String email, Model model) {
+        // TODO: Add your email check + reset password logic
+        model.addAttribute("message", "If this email exists, reset link sent to: " + email);
+        return "login"; // redirect back to login page with message
+    }
+
+    // Handle Create Account
+    @PostMapping("/signup")
+    public String signup(@RequestParam String username,
+                         @RequestParam String email,
+                         @RequestParam String password,
+                         Model model) {
+        // TODO: Save user in DB
+        model.addAttribute("message", "Account created successfully! You can login now.");
+        return "login";
+    }
+    
+    @GetMapping("/forgotPassword")
+    public String forgotPasswordPage() {
+        return "forgotPassword"; // Spring will map to /WEB-INF/jsp/forgotPassword.jsp
+    }
+
+    @GetMapping("/createAccount")
+    public String createAccountPage() {
+        return "createAccount"; // Spring will map to /WEB-INF/jsp/createAccount.jsp
+    }
 }

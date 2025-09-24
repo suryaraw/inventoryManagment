@@ -147,16 +147,13 @@
                         <td>${order.paymentId.id}</td>
                         <td>${order.dispatchStatus}</td>
 						<td>
-						    <
 							<button type="button"
 							        class="action-btn approve"
 							        id="approve-btn-${order.item_id}"
 							        onclick="approve('${order.item_id}', '${order.quantity}', '${order.paymentId.id}', '${order.s_no}')">
 							    Approve
 							</button>
-
 						</td>
-
                     </tr>
                 </c:forEach>
             </tbody>

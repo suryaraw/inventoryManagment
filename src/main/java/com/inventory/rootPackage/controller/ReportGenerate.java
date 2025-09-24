@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.inventory.rootPackage.ReportService.ReportService;
+import com.inventory.rootPackage.dto.PurchaseOrderDTO;
 import com.inventory.rootPackage.mailService.MailService;
 import com.inventory.rootPackage.model.ShoperPaid;
 import com.lowagie.text.Document;
@@ -25,7 +26,10 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class ReportGenerate {
 
 	@Autowired
@@ -45,7 +49,7 @@ public class ReportGenerate {
 	public String generatePdfAndSendEmail(Model model) {
 		try {
 			List<ShoperPaid> reports = reportService.getInventoryReport();
-
+			
 			// 1️⃣ Dynamic PDF path
 			String pdfDir = "C:/Users/HP/Downloads/";
 			String fileName = "inventory_report_" + System.currentTimeMillis() + ".pdf";
@@ -119,14 +123,14 @@ public class ReportGenerate {
 
 			document.close();
 			writer.close();
-
+			log.debug("pdf is crated for the report from order db");
 			// 7️⃣ Send email
-			mailService.sendEmailWithAttachment("manigapthykc@gmail.com", "Inventory Report",
+			mailService.sendEmailWithAttachment("manigapathykc@gmail.com", "Inventory Report",
 					"Hi Manish ❤️, please find attached your latest inventory report.", pdfFile);
 
 			// 8️⃣ Pass attributes to JSP
 			model.addAttribute("status", "success");
-			model.addAttribute("recipient", "way3samson@gmail.com");
+			model.addAttribute("recipient","manigapathykc@gmail.com");
 			model.addAttribute("subject", "Inventory Report");
 			model.addAttribute("message", "Mail with PDF sent successfully!");
 			model.addAttribute("errorDetails", null);
@@ -140,6 +144,7 @@ public class ReportGenerate {
 			model.addAttribute("message", "Failed to send mail with PDF.");
 			model.addAttribute("errorDetails", e.getMessage());
 			model.addAttribute("now", new Date());
+			log.error("cannot send email something went wrong may be wrong  mail");
 		}
 
 		return "ConfirmationMail";
@@ -150,5 +155,85 @@ public class ReportGenerate {
 		cell.setBackgroundColor(Color.WHITE);
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		return cell;
+	}
+	
+	public String generatePdfAndSendEmail(Model model, List<PurchaseOrderDTO> reports ,String mail ,String subject) {
+		try {
+			
+			// 1️⃣ Dynamic PDF path
+			String pdfDir = "C:/Users/HP/Downloads/";
+			String fileName = "inventory_report_" + System.currentTimeMillis() + ".pdf";
+			String pdfPath = pdfDir + fileName;
+			File pdfFile = new File(pdfPath);
+
+			// 2️⃣ Create PDF
+			Document document = new Document(PageSize.A4.rotate());
+			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
+			document.open();
+
+			// Fonts
+			Font titleFont = new Font(Font.HELVETICA, 18, Font.BOLD, Color.BLACK);
+			Font smallFont = new Font(Font.HELVETICA, 10, Font.NORMAL, Color.BLACK);
+			Font headFont = new Font(Font.HELVETICA, 10, Font.BOLD, Color.BLACK);
+			Font dataFont = new Font(Font.HELVETICA, 10, Font.NORMAL, Color.BLACK);
+
+			// 3️⃣ Timestamp (left aligned)
+			String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+			Paragraph ts = new Paragraph("Generated: " + timestamp, smallFont);
+			ts.setAlignment(Element.ALIGN_LEFT);
+			document.add(ts);
+
+			// 4️⃣ Title (center aligned)
+			Paragraph title = new Paragraph("Inventory Management Report", titleFont);
+			title.setAlignment(Element.ALIGN_CENTER);
+			title.setSpacingAfter(10);
+			document.add(title);
+
+			// 5️⃣ Table with all fields
+			PdfPTable table = new PdfPTable(6); // 6 columns
+			table.setWidthPercentage(100);
+			table.setSpacingBefore(10f);
+			table.setSpacingAfter(10f);
+
+
+			String[] headers = { "s_no" ,"Item ID", "Name", "Category", "CurrentStock","StockNeeded"};
+
+			for (String h : headers) {
+				PdfPCell cell = new PdfPCell(new Phrase(h, headFont));
+				cell.setBackgroundColor(Color.WHITE);
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table.addCell(cell);
+			}
+
+			int serial = 1;
+			for (PurchaseOrderDTO r : reports) {
+				table.addCell(createCell(String.valueOf(serial++), dataFont));
+				table.addCell(createCell(String.valueOf(r.getItemId()), dataFont));
+				table.addCell(createCell(r.getItemName(), dataFont));
+				table.addCell(createCell(r.getCategory(), dataFont));
+				table.addCell(createCell(String.valueOf(r.getStock()), dataFont));
+				table.addCell(createCell(String.valueOf(r.getNeeded()), dataFont));
+			}
+
+			document.add(table);
+
+			// 6️⃣ Footer
+			Paragraph footer = new Paragraph("UNIQ_MANAGEMENT_SYSTEM", smallFont);
+			footer.setAlignment(Element.ALIGN_CENTER);
+			document.add(footer);
+
+			document.close();
+			writer.close();
+			
+			log.debug("pdf created for requested supplier" + mail);
+			// 7️⃣ Send email
+			mailService.sendEmailWithAttachment(mail, "Inventory Report",
+					subject, pdfFile);
+
+		} catch (Exception e) {
+			log.error("exception occured for invalid crdentials may be null value or ip mismatch on sending mail to supplier");
+			e.printStackTrace();
+		}
+		return "ConfirmationMail";
 	}
 }

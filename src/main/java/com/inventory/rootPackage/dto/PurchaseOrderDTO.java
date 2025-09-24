@@ -6,18 +6,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PurchaseOrderDTO {
-    private Long id;
-    private String orderNumber;
-    private String orderDate;
-    private String status;
-
-//    private String retailerName;
-    private String wholesalerName;
+	
+    private Long itemId;
     private String itemName;
+    private String category;
 
-    private Integer quantity;
-    private Double unitPrice;
-    private Double gstRate;
-    private Double gstAmount;
-    private Double totalAmount;
+    private Integer stock;
+    private Integer needed;
+    
 }

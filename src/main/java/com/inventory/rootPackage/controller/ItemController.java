@@ -71,7 +71,7 @@ public class ItemController {
 
 //	    ItemDTO dto = ItemMapper.toDTO(item);
 //	    itemService.saveItem(dto);
-		return "redirect:/sup/add";
+		return "redirect:/items";
 	}
 
 	@GetMapping("/items")

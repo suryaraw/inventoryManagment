@@ -3,17 +3,23 @@ package com.inventory.rootPackage.ReportService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.inventory.rootPackage.model.ShoperPaid;
 import com.inventory.rootPackage.repository.ReportRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ReportService {
 	@Autowired
 	private ReportRepo reportRepo;
 
+	@Cacheable(value = "suppliers")
 	public List<ShoperPaid> getInventoryReport() {
+		log.info("shperpaid list retreived from db fpr report");
 		List<ShoperPaid> reports = reportRepo.findAll();
 		
 //		reports.add(new Report("SUKOVIA-17", 100, 20));

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.inventory.rootPackage.model.Item;
@@ -13,7 +14,10 @@ import com.inventory.rootPackage.model.ShoperPaid;
 import com.inventory.rootPackage.repository.ItemRepository;
 import com.inventory.rootPackage.repository.OrderRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class OrderService {
 	
 	@Autowired
@@ -24,19 +28,23 @@ public class OrderService {
 	
 	public void saveOrder(ShoperPaid order) {
 		repo.save(order);
+		log.info("Shoper paid saved in db");
 	}
 	
 	public List<ShoperPaid> getAll(){
+		log.info("retreived all shoperpaid from  db");
 		return repo.findAll();
 	}
 	
-//	@Cacheable(value = "Orderrecieved")
+	@Cacheable(value = "Orderrecieved")
 	public List<ShoperPaid> getByNotYet(){
+		log.debug("shoper paid from db | redis as notyet for approvel called");
 		return repo.findByDispatchStatus("NotYet");
 	}
 	
-//	@Cacheable(value = "OrderDispatched")
+	@Cacheable(value = "OrderDispatched")
 	public List<ShoperPaid> getByDiapatched(){
+		log.debug("shoper paid from db | redis as \"dispatched\" for approvel called");
 		return repo.findByDispatchStatus("Dispatched");
 	}
 
@@ -44,8 +52,10 @@ public class OrderService {
 	
 
 	    // Return grouped orders with stock info
+	
 	 public Map<String, List<Map<String, Object>>> getByInsufficientGroupedByBrand() {
 	    List<ShoperPaid> orders = repo.findByDispatchStatus("Insufficient");
+	    log.trace("from shoperpaid getting insufficient and group to specific using dto and map");
 	        return orders.stream().collect(Collectors.groupingBy(ShoperPaid::getBrand,
 	                    Collectors.mapping(order -> {
 	                        Map<String, Object> row = new HashMap<>();
@@ -61,7 +71,9 @@ public class OrderService {
 	                ));
 	    }
 	
+	 @Cacheable(value = "shoper", key ="#id" )
 	public ShoperPaid getById(Integer id){
+		 log.info("retreiving a shoerpaid sending as ShoperPaid and not as Optional");
 		return repo.findById(id).get();
 	}
 	
