@@ -33,7 +33,7 @@ public class PurchaseOrderController {
 	    }
 
 	    // redirect back after mail is sent
-	    return "redirect:/insufficient";
+	    return "redirect:/orders/insufficient";
 	}
 
 }
