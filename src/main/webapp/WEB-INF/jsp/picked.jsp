@@ -77,7 +77,7 @@
         </form>
 
         <!-- Purchase Order button -->
-        <form action="${pageContext.request.contextPath}/purchaseOrder" method="post">
+        <form action="${pageContext.request.contextPath}/payment" method="post">
             <button type="submit" class="btn btn-primary">Generate Purchase Order <i class="fa fa-arrow-right"></i></button>
         </form>
     </div>
