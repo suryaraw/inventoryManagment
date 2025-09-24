@@ -27,6 +27,7 @@ import com.inventory.rootPackage.repository.SupplierRepo;
 public class ItemAddService {
 	
 	private final org.slf4j.Logger log = LoggerFactory.getLogger(ItemAddService.class);
+//	private final Logger logi = LoggerFactory.getLogger(ItemAddService.class);
 	
 	@Autowired
 	private ItemRepository itemRepo;
