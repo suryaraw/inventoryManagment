@@ -78,4 +78,8 @@ public class UserService {
 	public void saveUser(UserCredentialEntity user) {
 		userRepository.save(user);
 	}
+	
+	public List<UserCredentialEntity> allAdmin(){
+		return userRepository.allAdmin("ADMIN");
+	}
 }
