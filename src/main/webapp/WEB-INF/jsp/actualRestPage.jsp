@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Inventory Management System - Forgot Password</title>
+    <title>Reset Password</title>
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,6 +20,7 @@
             justify-content: center;
             align-items: center;
             margin: 0;
+            font-family: 'Poppins', sans-serif;
         }
         .panel {
             background: rgba(255, 255, 255, 0.1);
@@ -46,21 +47,26 @@
         }
         button.theme-btn:hover {transform: scale(1.05);}
         .msg {margin-bottom: 12px; font-size: 13px; font-weight: 600;}
-        .success {color: #22c55e;}
-        
-		/* 🔹 Darker, bold, elegant liquidify error */
-		.error {
-		    color: #cc1f1a;           /* Dark red, bold but elegant */
-		    font-weight: 900;          /* Extra bold */
-		    font-size: 16px;           /* Slightly bigger for readability */
-		    display: inline-block;
-		    position: relative;
-		    animation: liquidify 2s ease-in-out infinite;
-		    text-shadow: 1px 1px 4px rgba(0,0,0,0.7); /* Subtle shadow to pop on background */
-		    letter-spacing: 0.5px;     /* Slightly spaced letters for premium look */
-		}
-
-
+        .success, .info {
+            color: #22c55e;
+            font-weight: 900;
+            font-size: 16px;
+            display: inline-block;
+            position: relative;
+            animation: liquidify 2s ease-in-out infinite;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+            letter-spacing: 0.5px;
+        }
+        .error {
+            color: #cc1f1a;
+            font-weight: 900;
+            font-size: 16px;
+            display: inline-block;
+            position: relative;
+            animation: liquidify 2s ease-in-out infinite;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+            letter-spacing: 0.5px;
+        }
         @keyframes liquidify {
             0% { transform: translateY(0) rotate(0deg); }
             25% { transform: translateY(-2px) rotate(-1deg); }
@@ -69,6 +75,19 @@
             100% { transform: translateY(0) rotate(0deg); }
         }
     </style>
+    <script>
+        function validatePasswords() {
+            var newPass = document.getElementById("newPassword").value;
+            var confirmPass = document.getElementById("confirmPassword").value;
+            var errorDiv = document.getElementById("errorMsg");
+
+            if (newPass !== confirmPass) {
+                errorDiv.textContent = "Passwords do not match!";
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+    </script>
 </head>
 <body>
     <div class="panel">
@@ -77,25 +96,28 @@
             <h1>INVENTORY MANAGEMENT</h1>
         </div>
         
-        <!-- 🔹 Display messages -->
+        <!-- Display server-side messages -->
         <c:if test="${not empty message}">
-            <div class="msg success">${message}</div>
+            <div class="msg info">${message}</div>
         </c:if>
         <c:if test="${not empty error}">
             <div class="msg error">${error}</div>
         </c:if>
 
-        <p class="subtitle">Forgot Password</p>
-        <form action="${pageContext.request.contextPath}/resetPassword" method="post">
+        <!-- JS validation error -->
+        <div id="errorMsg" class="msg error"></div>
+
+        <p class="subtitle">Reset Password</p>
+        <form action="${pageContext.request.contextPath}/reset" method="post" onsubmit="return validatePasswords();">
             <div class="input-group">
-                <i class="fa fa-user"></i>
-                <input type="text" name="username" placeholder="Username" required>
+                <i class="fa fa-lock"></i>
+                <input type="password" id="newPassword" name="newPassword" placeholder="New Password" required>
             </div>
             <div class="input-group">
                 <i class="fa fa-lock"></i>
-                <input type="password" name="currentPassword" placeholder="Current Password" required>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
             </div>
-            <button type="submit" class="theme-btn">Verify</button>
+            <button type="submit" class="theme-btn">Reset</button>
         </form>
     </div>
 </body>

@@ -1,5 +1,7 @@
 package com.inventory.rootPackage.controller;
 
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,6 @@ public class PurchaseOrderController {
 	            + " | ItemId: " + itemId 
 	            + " | Requesting Qty: " + neededQty);
 	    }
-
 	    // redirect back after mail is sent
 	    return "redirect:/orders/insufficient";
 	}

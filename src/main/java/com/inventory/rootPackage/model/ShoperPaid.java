@@ -32,6 +32,7 @@ public class ShoperPaid {
 	private String brand;
 	private String model;
 	private Double price;
+	
 	private Double gst;
 	private Integer quantity;
 	private Double totalprice;
