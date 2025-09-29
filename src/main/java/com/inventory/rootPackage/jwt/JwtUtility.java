@@ -15,16 +15,22 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtility {
 	
     private final  SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256); // keep safe!
-
+    
+    private final long jwtExpiration = 60 * 60; // 1 hour in seconds
+    
     public String generateToken(String username, String role) {
     	System.out.println(username +role +secretKey);
         return Jwts.builder()
                 .setSubject(username)
                 .claim("role", role)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hour
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration * 1000)) // 1 hour
                 .signWith(secretKey)
                 .compact();
+    }
+    
+    public long getJwtExpiration() {
+        return jwtExpiration;
     }
 
     public String extractUsername(String token) {

@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.inventory.rootPackage.jwt.CustomJWTFilter;
 import com.inventory.rootPackage.jwt.customSucessHandler;
+import com.inventory.rootPackage.oauth2.OAuth2MvcSuccessHandler;
 import com.inventory.rootPackage.springservice.CustomUserService;
 
 @Configuration
@@ -27,14 +28,21 @@ public class SecurityConfig {
 	@Autowired
 	private CustomUserService service;
 	
-	@Autowired
-	private customSucessHandler handler;
-	
-	@Autowired
-	private CustomJWTFilter filter;
+//	@Autowired
+//	private customSucessHandler handler;
+//	
+//	@Autowired
+//	private CustomJWTFilter filter;
+//	
+//	@Autowired
+//	private  OAuth2MvcSuccessHandler oAuth2MvcSuccessHandler;
 	
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain filterChain(HttpSecurity http, 
+            OAuth2MvcSuccessHandler oAuth2MvcSuccessHandler,
+            customSucessHandler handler,
+            CustomJWTFilter filter) throws Exception {
+//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	    http
 	        .csrf(csrf -> csrf.disable()) // keep disabled for now
 	        .sessionManagement(session -> 
@@ -65,6 +73,14 @@ public class SecurityConfig {
 	            .failureUrl("/login?error=true")
 	            .permitAll()
 	        )
+	        .oauth2Login(oauth2 -> oauth2
+	                .loginPage("/login") // show your JSP login page
+	                .successHandler(oAuth2MvcSuccessHandler)
+//	                .defaultSuccessUrl("/dashboard", true) // redirect after successful OAuth2 login
+	               
+	                    // Optional: custom OAuth2UserService if you want DB mapping
+	                
+	            )
 	        .logout(logout -> logout
 	        	    .logoutUrl("/logout")   
 	        	    .logoutSuccessUrl("/login") // GET or POST /logout

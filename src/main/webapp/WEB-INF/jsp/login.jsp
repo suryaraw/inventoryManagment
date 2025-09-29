@@ -94,6 +94,22 @@
             margin: 0 5px;
         }
         .extra-links a:hover {color: #2563eb;}
+		
+		/* Google Login Button */
+		button.google-btn {
+		    background: rgba(66, 133, 244, 0.85); /* semi-transparent Google blue */
+		    color: white;
+		    border-radius: 6px;
+		    border: none;
+		    font-weight: 600;
+		    transition: transform 0.3s, background 0.3s;
+		}
+
+		button.google-btn:hover {
+		    background: rgba(66, 133, 244, 1); /* solid on hover */
+		    transform: scale(1.05);
+		}
+
     </style>
 </head>
 <body>
@@ -135,6 +151,15 @@
 			</button>
         
 		</form>
+		
+		<!-- 🔹 Google OAuth2 Login Button -->
+		<form action="${pageContext.request.contextPath}/oauth2/authorization/google" method="get" style="margin-top:15px;">
+		    <button type="submit" class="theme-btn google-btn" 
+		            style="display:flex; align-items:center; justify-content:center; gap:8px; padding:10px 16px; width:100%; font-size:15px;">
+		        <i class="fa-brands fa-google"></i> Login with Google
+		    </button>
+		</form>
+
         <div class="extra-links" style="margin-top:15px;">
             <a href="/forgotPassword">Forgot Password?</a> | 
             <a href="/createAccount">Create Account</a>

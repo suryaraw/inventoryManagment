@@ -50,7 +50,7 @@ public class ReportScheduling {
 	private ReportService reportService;
 	
 //	@Scheduled(cron = "0 25 21 ? * MON-FRI")
-	@Scheduled(cron = "0 52 16 * * ?")
+	@Scheduled(cron = "0 15 15 * * ?")
 	public void scheduleReport() throws DocumentException, FileNotFoundException, MessagingException {
 		
 			List<ShoperPaid> reports = reportService.getInventoryReport();
