@@ -71,20 +71,6 @@ public class AuthController {
 		return "logout";
 	}
 
-	// ========== NEW FEATURES ==========
-
-	// Handle Forgot Password
-	@GetMapping("/forgotPassword")
-	public String showForgotPasswordPage() {
-		return "forgotPassword"; // forgotPassword.jsp
-	}
-
-	// Handle Create Account
-	@GetMapping("/createAccount")
-	public String showCreateAccountPage() {
-		return "createAccount"; // createAccount.jsp
-	}
-
 	@PostMapping("/createAccountService")
 	public String createAccount(@RequestParam String username, @RequestParam String email, @RequestParam String phone,
 			@RequestParam Role role, @RequestParam String password, @RequestParam String confirmPassword, Model model) {
