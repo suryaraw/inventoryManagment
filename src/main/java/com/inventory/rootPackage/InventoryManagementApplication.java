@@ -14,5 +14,6 @@ public class InventoryManagementApplication {
 		SpringApplication.run(InventoryManagementApplication.class, args);
 		System.out.println("Started...");
 	}
+//	C:\Users\HP\git\inventoryManagment
 }
 

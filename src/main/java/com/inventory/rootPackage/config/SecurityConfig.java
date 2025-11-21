@@ -15,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import com.inventory.rootPackage.jwt.CustomJWTFilter;
 import com.inventory.rootPackage.jwt.customSucessHandler;
 import com.inventory.rootPackage.oauth2.OAuth2MvcSuccessHandler;
@@ -37,6 +36,69 @@ public class SecurityConfig {
 //	@Autowired
 //	private  OAuth2MvcSuccessHandler oAuth2MvcSuccessHandler;
 	
+	
+//	@Bean
+//	public SecurityFilterChain filterChain(
+//	        HttpSecurity http,
+//	        OAuth2MvcSuccessHandler oAuth2MvcSuccessHandler,
+//	        customSucessHandler handler,
+//	        CustomJWTFilter filter) throws Exception {
+//
+//	    http
+//	        .csrf(csrf -> csrf.disable())
+//	        .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//	        .authorizeHttpRequests(auth -> auth
+//
+//	            // static
+//	            .requestMatchers("/css/**", "/js/**", "/images/**", "/favicon.ico", "/webjars/**", "/fonts/**", "/font/**").permitAll()
+//
+//	            // public pages & auth endpoints
+//	            .requestMatchers("/login", "/doLogin", "/logout", "/createAccount", "/forgotPassword",
+//	                             "/signup/**", "/forgot-password/**", "/validateOtpAndReset", "/resetPassword",
+//	                             "/createAccountService").permitAll()
+//
+//	            // AI endpoint open
+//	            .requestMatchers("/api/ai/**").permitAll()
+//
+//	            // role protected
+//	            .requestMatchers("/admin/**", "/items/**", "/item/**", "/approve/**", "/sendFailureMail/**",
+//	                             "/orders/**", "/notifyBrand/**", "/report/**", "/sup/**").hasRole("ADMIN")
+//
+//	            .requestMatchers("/shop/**", "/checkout", "/paymentSuccess").hasRole("RETAIL_SHOP")
+//
+//	            // dashboard - if you want dashboard public to authenticated users, use authenticated()
+//	            .requestMatchers("/dashboard").authenticated()
+//
+//	            .anyRequest().authenticated()
+//	        )
+//	        .formLogin(form -> form
+//	            .loginPage("/login")
+//	            .loginProcessingUrl("/doLogin")
+//	            .usernameParameter("username")
+//	            .passwordParameter("password")
+//	            .successHandler(handler)
+//	            .failureUrl("/login?error=true")
+//	            .permitAll()
+//	        )
+//	        .oauth2Login(oauth2 -> oauth2
+//	            .loginPage("/login")
+//	            .successHandler(oAuth2MvcSuccessHandler)
+//	        )
+//	        .logout(logout -> logout
+//	            .logoutUrl("/logout")
+//	            .deleteCookies("jwt")
+//	            .clearAuthentication(true)
+//	            .logoutSuccessUrl("/login?logout=true")
+//	            .permitAll()
+//	        );
+//
+//	    // make sure JWT filter executes BEFORE UsernamePasswordAuthenticationFilter
+//	    http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+//
+//	    return http.build();
+//	}
+
+	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http, 
             OAuth2MvcSuccessHandler oAuth2MvcSuccessHandler,
@@ -50,9 +112,12 @@ public class SecurityConfig {
         )
 	        .authorizeHttpRequests(auth -> auth
 	            // Public pages
-	            .requestMatchers(HttpMethod.GET,"/login", "/createAccount", "/forgotPassword").permitAll()
-	            .requestMatchers("/images/**", "/css/**", "/js/**", "/webjars/**","/WEB-INF/**").permitAll()
-	            .requestMatchers(HttpMethod.POST, "/doLogin","/signup/**","/forgot-password/**","/validateOtpAndReset","/resetPassword","/createAccountService").permitAll()
+	            .requestMatchers(HttpMethod.GET,"/login", "/createAccount", "/forgotPassword","/pinecone/**","/ai/**").permitAll()
+	            .requestMatchers("/images/**", "/css/**", "/js/**", "/webjars/**","/WEB-INF/**",
+	            
+	                    "/favicon.ico",
+	                    "/fonts/**").permitAll()
+	            .requestMatchers(HttpMethod.POST, "/doLogin","/signup/**","/forgot-password/**","/validateOtpAndReset","/resetPassword","/createAccountService","/api/ai/**").permitAll()
 	            
 	            // Admin-only pages
 	            .requestMatchers("/admin/**", "/items/**", "/item/**", "/approve/**", "/sendFailureMail/**", "/orders/**", "/notifyBrand/**", "/report/**", "/sup/**").hasRole("ADMIN")

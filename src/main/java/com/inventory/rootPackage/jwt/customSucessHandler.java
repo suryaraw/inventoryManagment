@@ -23,6 +23,14 @@ public class customSucessHandler  implements AuthenticationSuccessHandler{
                                         Authentication authentication) throws IOException {
         String username = authentication.getName();
         String role = authentication.getAuthorities().iterator().next().getAuthority();
+        
+//        String role = authentication.getAuthorities()
+//                .stream()
+//                .map(a -> a.getAuthority())
+//                .filter(r -> r.equals("ROLE_ADMIN") || r.equals("ROLE_RETAIL_SHOP"))
+//                .findFirst()
+//                .orElse("UNKNOWN");
+
 
         // Generate JWT
         String token = jwtUtil.generateToken(username, role);
