@@ -38,10 +38,11 @@ public class DatabaseSyncService {
         syncShoperPaid();
         syncPayments();
         syncPaymentResponses();
+        
     }
 
     // 🟦 SYNC ITEMS
-    private void syncItems() {
+    public void syncItems() {
         itemRepo.findAll().forEach(item -> {
             try {
                 String text = formatter.formatItem(item);
@@ -53,7 +54,7 @@ public class DatabaseSyncService {
     }
 
     // 🟩 SYNC WHOLESALERS
-    private void syncWholesalers() {
+    public void syncWholesalers() {
         wholesalerRepo.findAll().forEach(supplier -> {
             try {
                 String text = formatter.formatWholesaler(supplier);
@@ -65,7 +66,7 @@ public class DatabaseSyncService {
     }
 
     // 🟧 SYNC SHOPERPaid (Purchased Records)
-    private void syncShoperPaid() {
+    public void syncShoperPaid() {
         shoperPaidRepo.findAll().forEach(sp -> {
             try {
                 String text = formatter.formatShoperPaid(sp);
@@ -77,7 +78,7 @@ public class DatabaseSyncService {
     }
 
     // 🟥 SYNC PAYMENT ENTITY
-    private void syncPayments() {
+    public void syncPayments() {
         paymentEntityRepo.findAll().forEach(pe -> {
             try {
                 String text = formatter.formatPaymentEntity(pe);

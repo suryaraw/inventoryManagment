@@ -3,6 +3,8 @@ package com.inventory.rootPackage.model;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,5 +29,6 @@ public class Wholesaler implements Serializable {
     private String address;
     
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Item> items;
 }

@@ -1,13 +1,12 @@
 package com.inventory.rootPackage.ai;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.inventory.rootPackage.rag.RetrieverPineconeDto;
+import com.inventory.rootPackage.rag.AiOrchestrator;
 import com.inventory.rootPackage.rag.RetriverService;
 
 import dev.langchain4j.model.ollama.OllamaChatModel;
@@ -33,24 +32,36 @@ public class AIService {
     @Autowired
     private AnswerGenrator answerGen;
 
-    public Map<String, String> handleQuery(String query) {
+//    public Map<String, String> handleQuery(String query) {
+//
+//        Map<String, String> resp = new HashMap<>();
+//
+//        try {
+//            // 1️⃣ Get Pinecone Context
+//            List<RetrieverPineconeDto> contexts = retriever.retrieve(query);
+//
+//            // 2️⃣ Generate Answer using LLM + context
+//            String answer = answerGen.generateAnswer(query, contexts);
+//
+//            resp.put("answer", answer);
+//            return resp;
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            resp.put("answer", "AI Server Error. Please try again.");
+//            return resp;
+//        }
+//    }
+    
+    @Autowired
+    private AiOrchestrator orchestrator;
+
+    public Map<String, String> handleQuery(String query) throws Exception {
+
+        String result = orchestrator.handle(query);
 
         Map<String, String> resp = new HashMap<>();
-
-        try {
-            // 1️⃣ Get Pinecone Context
-            List<RetrieverPineconeDto> contexts = retriever.retrieve(query);
-
-            // 2️⃣ Generate Answer using LLM + context
-            String answer = answerGen.generateAnswer(query, contexts);
-
-            resp.put("answer", answer);
-            return resp;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            resp.put("answer", "AI Server Error. Please try again.");
-            return resp;
-        }
+        resp.put("answer", result);
+        return resp;
     }
 }

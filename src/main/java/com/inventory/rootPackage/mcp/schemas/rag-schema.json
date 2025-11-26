@@ -1,0 +1,14 @@
+{
+  "name": "search_rag",
+  "description": "Use this tool for questions about items, brands, models, categories, stock, prices, quantities, suppliers, wholesalers, payments, orders, purchased items, inventory analytics, or anything stored in Pinecone. This tool searches the Pinecone vector index using semantic similarity.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "query": { 
+        "type": "string",
+        "description": "The exact user question to be semantically matched against Pinecone embeddings."
+      }
+    },
+    "required": ["query"]
+  }
+}

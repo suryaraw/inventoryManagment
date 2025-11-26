@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,6 +43,9 @@ public class Item implements Serializable{
 
 	@ManyToOne
 	@JoinColumn(name = "supplier_id")
+	@JsonIgnore
     private Wholesaler supplier;
+	
+	
 
 }

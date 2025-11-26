@@ -145,7 +145,18 @@
     <artifactId>langchain4j-ollama</artifactId>
     <version>0.36.0</version>
 </dependency>
+<!--temporal dependency -->
+<dependency>
+    <groupId>io.temporal</groupId>
+    <artifactId>temporal-sdk</artifactId>
+    <version>1.25.0</version>
+</dependency>
 
+<dependency>
+    <groupId>io.temporal</groupId>
+    <artifactId>temporal-spring-boot-starter</artifactId>
+    <version>1.25.0</version>
+</dependency>
 
 
 <dependency>

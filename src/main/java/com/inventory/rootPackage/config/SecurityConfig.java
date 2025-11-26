@@ -117,7 +117,7 @@ public class SecurityConfig {
 	            
 	                    "/favicon.ico",
 	                    "/fonts/**").permitAll()
-	            .requestMatchers(HttpMethod.POST, "/doLogin","/signup/**","/forgot-password/**","/validateOtpAndReset","/resetPassword","/createAccountService","/api/ai/**").permitAll()
+	            .requestMatchers(HttpMethod.POST, "/doLogin","/signup/**","/forgot-password/**","/validateOtpAndReset","/resetPassword","/createAccountService","/api/ai/**", "/mcp/**").permitAll()
 	            
 	            // Admin-only pages
 	            .requestMatchers("/admin/**", "/items/**", "/item/**", "/approve/**", "/sendFailureMail/**", "/orders/**", "/notifyBrand/**", "/report/**", "/sup/**").hasRole("ADMIN")

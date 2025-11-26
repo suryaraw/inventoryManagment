@@ -26,9 +26,10 @@ public class OllamaConfig {
 
 	    return OllamaChatModel.builder()
 	            .baseUrl("http://localhost:11434")
-	            .modelName("llama3.2:1b")// updated
+	            .modelName("llama3.2:3b")// updated
 	            .temperature(0.4)
 //	            .httpClient(httpClient)     // <<< IMPORTANT
+	            .timeout(Duration.ofSeconds(300))
 	            .build();
 	}
 
