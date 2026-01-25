@@ -1,9 +1,11 @@
 package com.inventory.rootPackage.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,7 +24,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "supplier")
-public class Item {
+public class Item implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +43,9 @@ public class Item {
 
 	@ManyToOne
 	@JoinColumn(name = "supplier_id")
+	@JsonIgnore
     private Wholesaler supplier;
+	
+	
 
 }

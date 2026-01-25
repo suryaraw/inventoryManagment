@@ -1,0 +1,29 @@
+{
+  "name": "get_inventory",
+  "description": "Use ONLY when the user asks about total items, overall stock count, how many items, list of all products, or inventory summary.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "items": {
+        "type": "array",
+        "description": "List of inventory items",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "number", "description": "Unique item_id of the product." },
+            "name": { "type": "string", "description": "Name of the item." },
+            "category": { "type": "string", "description": "Category of the item." },
+            "brand": { "type": "string", "description": "Brand of the item." },
+            "model": { "type": "string", "description": "Model name/number." },
+            "wholesalePrice": { "type": "number" },
+            "retailPrice": { "type": "number" },
+            "gstRate": { "type": "number" },
+            "dateOfPurchase": { "type": "string", "format": "date" },
+            "quantity": { "type": "number" },
+            "supplierName": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

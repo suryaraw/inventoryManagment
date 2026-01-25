@@ -1,5 +1,7 @@
 package com.inventory.rootPackage.model;
 
+import java.io.Serializable;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,7 +10,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Retailer {
+public class Retailer implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

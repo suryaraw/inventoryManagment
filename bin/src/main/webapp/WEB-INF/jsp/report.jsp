@@ -3,99 +3,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Inventory Management - Dashboard</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<style>
-	    body {
-	        font-family: 'Roboto', sans-serif;
-	        background-color: #f0f4ff;
-	        margin: 0;
-	        display: flex;
-	        flex-direction: column;
-	        align-items: center;
-	        justify-content: flex-start;
-	        padding: 40px 0;
-	        min-height: 100vh;
-	    }
-	    h2 {
-	        font-size: 36px;
-	        font-weight: 800;
-	        color: #007bff;
-	        margin-bottom: 40px; /* space between title and table */
-	        text-transform: uppercase;
-	        letter-spacing: 1px;
-	        text-align: center;
-	        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
-	    }
-	    table {
-	        width: 70%;
-	        border-collapse: collapse;
-	        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	        border-radius: 8px;
-	        overflow: hidden;
-	        background: #fff;
-	    }
-	    th, td {
-	        padding: 12px 15px;
-	        text-align: center;
-	        border-bottom: 1px solid #ddd;
-	    }
-	    th {
-	        background-color: #007bff;
-	        color: #fff;
-	        font-weight: 600;
-	        text-transform: uppercase;
-	    }
-	    tr:hover {
-	        background-color: #f1f1f1;
-	        transform: scale(1.02);
-	        transition: all 0.2s ease-in-out;
-	    }
-	    td {
-	        color: #555;
-	    }
-	    /* PDF Button style */
-	    .pdf-btn {
-	        margin-top: 25px;
-	        padding: 12px 30px;
-	        font-size: 16px;
-	        font-weight: 600;
-	        color: #fff;
-	        background-color: #007bff;
-	        border: none;
-	        border-radius: 8px;
-	        cursor: pointer;
-	        transition: all 0.3s ease;
-	    }
-	    .pdf-btn:hover {
-	        background-color: #0056b3;
-	        transform: translateY(-2px);
-	        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-	    }
-	</style>
-</head>
-<body>
-    <h2>Inventory Management Report</h2>
-    <table>
-        <tr>
-            <th>Item Name</th>
-            <th>Total Stock</th>
-            <th>Sold</th>
-        </tr>
-        <c:forEach var="report" items="${reports}">
-            <tr>
-                <td>${report.itemName}</td>
-                <td>${report.totalStock}</td>
-                <td>${report.sold}</td>
-            </tr>
-        </c:forEach>
-    </table>
+    <title>Inventory Management - Report</title>
+	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
 
-    <!-- Generate PDF Button -->
-    <form action="${pageContext.request.contextPath}/report/pdf" method="get">
-        <button type="submit" class="pdf-btn">GENERATE PDF</button>
-    </form>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+	<script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
+
+<div class="app" style="flex-direction:column;align-items:center; padding:20px;">
+    <div class="panel" style="width:80%; max-width:900px;">
+        <h2 style="margin-bottom:20px;">Inventory Management Report</h2>
+        <table>
+            <tr>
+                <th>Item Name</th>
+                <th>Total Stock</th>
+                <th>Sold</th>
+            </tr>
+            <c:forEach var="report" items="${reports}">
+                <tr>
+                    <td>${report.itemName}</td>
+                    <td>${report.totalStock}</td>
+                    <td>${report.sold}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
+        <!-- Generate PDF Button -->
+        <form action="${pageContext.request.contextPath}/report/pdf" method="get" style="margin-top:20px; text-align:center;">
+            <button type="submit" class="theme-toggle">GENERATE PDF</button>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>

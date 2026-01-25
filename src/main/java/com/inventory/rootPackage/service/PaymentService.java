@@ -1,54 +1,113 @@
 package com.inventory.rootPackage.service;
 
 import com.inventory.rootPackage.model.PaymentEntity;
+import com.inventory.rootPackage.model.PaymentResponseEntity;
 import com.inventory.rootPackage.dto.PaymentDTO;
 import com.inventory.rootPackage.mapper.PaymentMapper;
 import com.inventory.rootPackage.repository.PaymentRepository;
+import com.inventory.rootPackage.repository.PaymentResponseRepository;
 import com.razorpay.*;
+
+import lombok.extern.slf4j.Slf4j;
+
+import java.time.LocalDateTime;
+
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 
 @Service
+@Slf4j
 public class PaymentService {
+	
+	 @Value("${razorpay.key.id}")
+	private String KEY_ID;      
+	 @Value("${razorpay.key.secret}")
+	 private String KEY_SECRET;
+   
+	 @Autowired
+	 private PaymentRepository repo;
+	 
+	 @Autowired
+	 private PaymentResponseRepository paymentResponseRepo;
+	 
+	 
+    // create order
+    public String createOrder(Double amount) throws Exception {
+        RazorpayClient client = new RazorpayClient(KEY_ID, KEY_SECRET);
 
-    @Value("${razorpay.key.id}")
-    private String keyId;
+        if (amount <= 0 || amount > 100000) { 
+            throw new IllegalArgumentException("Amount must be between ₹1 and ₹1,00,000");
+        }
 
-    @Value("${razorpay.key.secret}")
-    private String keySecret;
+        
+        JSONObject orderRequest = new JSONObject();
+        
+        orderRequest.put("amount", (long)(amount * 100)); // Razorpay = paise
+        orderRequest.put("currency", "INR");
+        orderRequest.put("receipt", "txn_" + System.currentTimeMillis());
 
-    private final PaymentRepository paymentRepository;
-
-    public PaymentService(PaymentRepository paymentRepository) {
-        this.paymentRepository = paymentRepository;
-    }
-
-    // Create Razorpay Order
-    public String createOrder(Double amount) throws RazorpayException {
-        RazorpayClient client = new RazorpayClient(keyId, keySecret);
-        System.out.println("---order init---");
-        JSONObject options = new JSONObject();
-        options.put("amount", amount * 100); // amount in paise
-        options.put("currency", "INR");
-        options.put("receipt", "txn_" + System.currentTimeMillis());
-
-        Order order = client.orders.create(options);
-        System.out.println(options);
+        Order order = client.orders.create(orderRequest);
         System.out.println(order.toString());
-        //order.toString(); entire json in testing we can send entire order
-        //return order.get("id");//in production only id order.get("id");
-        return order.toJson().toString();
+        log.debug("validating the client in razorpay api by own method ");
+        return order.toString(); // returns JSON with id, amount etc
     }
 
-    // Save successful payment
-    public PaymentDTO savePayment(PaymentDTO paymentDTO) {
-    	System.out.println("---save---");
-    	PaymentEntity entity = PaymentMapper.toEntity(paymentDTO);
-    	System.out.println(entity);
-    	PaymentEntity saved = paymentRepository.save(entity);
-    	System.out.println(saved);
-        return PaymentMapper.toDTO(saved);
+    // return keyId for checkout.js
+    public String getKeyId() {
+        return KEY_ID;
     }
+
+    // verify signature
+    public boolean verifyPayment(String orderId, String paymentId, String signature) {
+        try {
+            String data = orderId + "|" + paymentId;
+            log.debug("verifing the payment by rayzerpay api as a boolean");
+            return Utils.verifySignature(data, signature, KEY_SECRET);
+        } catch (Exception e) {
+        	log.error("data and razorpay signature or secret key wrong declined",signature+""+KEY_SECRET);
+            return false;
+        }
+    }
+
+    // Save to DB
+    @CachePut(value = "payment" )
+    public void savePayment(PaymentDTO dto, String status) {
+        PaymentEntity entity = PaymentMapper.toEntity(dto);
+        entity.setStatus(status);
+        repo.save(entity);
+        log.info("saving payment to db");
+    }
+
+    //fetch payment details from razorpay
+    public JSONObject fetchPaymentDetails(String paymentId) throws Exception {
+        RazorpayClient client = new RazorpayClient(KEY_ID, KEY_SECRET);
+        Payment payment = client.payments.fetch(paymentId);
+        log.debug("fetching payment details from Razorpayment");
+        return payment.toJson(); // returns full JSON
+    }
+    
+    //save response
+    
+    @CachePut(value = "paymentResponse" )
+    public void savePaymentResponse(String orderId, String paymentId, String responseJson,LocalDateTime timestamp) {
+        PaymentResponseEntity response = new PaymentResponseEntity();
+        response.setOrderId(orderId);
+        response.setPaymentId(paymentId);
+        response.setResponseJson(responseJson);
+        response.setTimestamp(timestamp);
+
+        paymentResponseRepo.save(response);
+        log.debug("saving payment response details from Razorpayment");
+    }
+    
+    @Cacheable(value = "payment",key = "#id")
+	public PaymentEntity getPayment(String id) {
+    		log.info("geting payment by id");
+		return repo.getPaymentDetails(id).orElseThrow(null);
+	}
 }

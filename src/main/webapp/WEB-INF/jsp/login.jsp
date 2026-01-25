@@ -1,8 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+	
     <title>Inventory Management System - Login</title>
+	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
@@ -89,6 +94,22 @@
             margin: 0 5px;
         }
         .extra-links a:hover {color: #2563eb;}
+		
+		/* Google Login Button */
+		button.google-btn {
+		    background: rgba(66, 133, 244, 0.85); /* semi-transparent Google blue */
+		    color: white;
+		    border-radius: 6px;
+		    border: none;
+		    font-weight: 600;
+		    transition: transform 0.3s, background 0.3s;
+		}
+
+		button.google-btn:hover {
+		    background: rgba(66, 133, 244, 1); /* solid on hover */
+		    transform: scale(1.05);
+		}
+
     </style>
 </head>
 <body>
@@ -98,7 +119,15 @@
             <h1>INVENTORY MANAGEMENT</h1>
         </div>
         <p class="subtitle">Secure Login</p>
-        <form action="${pageContext.request.contextPath}/login" method="post">
+		
+		<!-- 🔴 Show error message if login fails -->
+		<c:if test="${param.error != null}">
+		    <p style="color:red; font-weight:bold; margin-bottom: 10px;">
+		        Invalid username or password
+		    </p>
+		</c:if>
+
+        <form action="${pageContext.request.contextPath}/doLogin" method="post"><!--changed--> 
             <div class="input-group">
                 <i class="fa fa-user"></i>
                 <input type="text" name="username" placeholder="Username" required>
@@ -107,19 +136,33 @@
                 <i class="fa fa-lock"></i>
                 <input type="password" name="password" placeholder="Password" required>
             </div>
-            <div class="input-group">
+          <!--  <div class="input-group">
                 <i class="fa fa-users"></i>
                 <select name="role" required>
                     <option value="">-- Select Role --</option>
                     <option value="ADMIN">Admin</option>
                     <option value="RETAIL_SHOP">Retail Shop</option>
                 </select>
-            </div>
-            <button type="submit" class="theme-btn">Login</button>
-        </form>
+            </div>-->
+       
+			<button type="submit" class="theme-btn" 
+			        style="padding:10px 16px; width:180px; font-size:15px;">
+			    Login
+			</button>
+        
+		</form>
+		
+		<!-- 🔹 Google OAuth2 Login Button -->
+		<form action="${pageContext.request.contextPath}/oauth2/authorization/google" method="get" style="margin-top:15px;">
+		    <button type="submit" class="theme-btn google-btn" 
+		            style="display:flex; align-items:center; justify-content:center; gap:8px; padding:10px 16px; width:100%; font-size:15px;">
+		        <i class="fa-brands fa-google"></i> Login with Google
+		    </button>
+		</form>
+
         <div class="extra-links" style="margin-top:15px;">
-            <a href="forgotPassword.jsp">Forgot Password?</a> | 
-            <a href="createAccount.jsp">Create Account</a>
+            <a href="/forgotPassword">Forgot Password?</a> | 
+            <a href="/createAccount">Create Account</a>
         </div>
     </div>
 </body>

@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <title>Payment Success</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
 
     <!-- Fonts & CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="dashboard-page">
@@ -54,17 +54,10 @@
                 <div id="adminAvatar" class="avatar"></div>
             </div>
         </div>
-
         <div class="content">
             <div class="panel success-panel">
                 <h2><i class="fa-solid fa-check-circle" style="color:green"></i> Payment Successful</h2>
-                <p>Your payment was processed successfully!</p>
-                <ul>
-                    <li><strong>Order ID:</strong> ${param.orderId}</li>
-                    <li><strong>Payment ID:</strong> ${param.paymentId}</li>
-                    <li><strong>Signature:</strong> ${param.signature}</li>
-                </ul>
-                <a href="${pageContext.request.contextPath}/dashboard" class="btn">Back to Dashboard</a>
+                <p>Your payment was processed successfully!</p> 
             </div>
         </div>
     </main>

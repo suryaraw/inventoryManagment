@@ -4,6 +4,8 @@
 <html>
 <head>
     <title>Inventory Management - Report</title>
+	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -75,11 +77,14 @@
         <form action="${pageContext.request.contextPath}/shop/items" method="get">
             <button type="submit" class="btn"><i class="fa fa-arrow-left"></i> Back</button>
         </form>
-
         <!-- Purchase Order button -->
-        <form action="${pageContext.request.contextPath}/purchaseOrder" method="post">
-            <button type="submit" class="btn btn-primary">Generate Purchase Order <i class="fa fa-arrow-right"></i></button>
-        </form>
+		<form action="${pageContext.request.contextPath}/checkout" method="post">
+		    <input type="hidden" name="orderSum" value="${orderSum}" />
+		    <input type="hidden" name="forRazor" value="${forRazor}" />
+		    <button type="submit" class="btn btn-primary">
+		        Generate Purchase Order <i class="fa fa-arrow-right"></i>
+		    </button>
+		</form>
     </div>
 </div>
 

@@ -1,0 +1,15 @@
+{
+  "name": "sync_pinecone",
+  "description": "Trigger a long-running workflow to sync the SQL database with Pinecone vector index. Use ONLY when user explicitly asks to re-sync or refresh Pinecone. This tool does NOT perform syncing directly; it only starts the Temporal workflow.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "mode": {
+        "type": "string",
+        "description": "Sync type: 'full' or 'incremental'",
+        "enum": ["full", "incremental"]
+      }
+    },
+    "required": ["mode"]
+  }
+}

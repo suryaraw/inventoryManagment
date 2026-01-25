@@ -1,22 +1,32 @@
 package com.inventory.rootPackage.ReportService;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.inventory.rootPackage.ReportModel.Report;
+import com.inventory.rootPackage.model.ShoperPaid;
+import com.inventory.rootPackage.repository.ReportRepo;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class ReportService {
+	@Autowired
+	private ReportRepo reportRepo;
 
-	public List<Report> getInventoryReport() {
-		List<Report> reports = new ArrayList<>();
-		reports.add(new Report("SUKOVIA-17", 100, 20));
-		reports.add(new Report("AIRCRAFT", 50, 5));
-		reports.add(new Report("PANZER", 200, 40));
-		reports.add(new Report("FF-22", 200, 40));
-		reports.add(new Report("FAT MAN", 200, 40));
+	@Cacheable(value = "suppliers")
+	public List<ShoperPaid> getInventoryReport() {
+		log.info("shperpaid list retreived from db fpr report");
+		List<ShoperPaid> reports = reportRepo.findAll();
+		
+//		reports.add(new Report("SUKOVIA-17", 100, 20));
+//		reports.add(new Report("AIRCRAFT", 50, 5));
+//		reports.add(new Report("PANZER", 200, 40));
+//		reports.add(new Report("FF-22", 200, 40));
+//		reports.add(new Report("FAT MAN", 200, 40));
 		return reports;
 	}
 

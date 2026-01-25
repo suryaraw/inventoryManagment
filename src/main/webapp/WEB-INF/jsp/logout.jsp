@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Logout</title>
+	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
     <style>
@@ -62,6 +64,13 @@
     </style>
 </head>
 <body>
+	<div class="logout-container">
+
+	    <div class="logout-box">
+<body class="dashboard-page">
+
+	<script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
+
     <div class="panel">
         <h2>You have successfully logged out.</h2>
         <a href="login">
